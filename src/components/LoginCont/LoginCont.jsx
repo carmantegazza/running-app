@@ -4,15 +4,14 @@ import { teal } from '@mui/material/colors';
 
 const LoginCont = () => {
 
-    const color1= teal[400]
-
     return (
-        <Grid container> 
-            <HiUser 
-            fontSize={35}
-            color="#7C83FD" />
-        <ButtonGroup variant="contained" aria-label="button group">            
-            <Button variant='outlined'>Sign In</Button>
+        <Grid container>  
+            <ButtonGroup variant="contained" aria-label="button group">            
+                <Button variant='outlined'  
+                        startIcon={<HiUser 
+                                    fontSize={35}
+                                    color="#7C83FD" />}>    
+                    Sign In</Button>
             <Button>Sign Up</Button>
         </ButtonGroup>
       </Grid>
