@@ -1,5 +1,6 @@
 import { Grid, Button, Typography } from "@mui/material"
 import { RiRunLine } from "@react-icons/all-files/ri/RiRunLine"
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -20,7 +21,8 @@ const Home = () => {
                     Take your trAIning to a whole new level</Typography>
             <Typography paragraph='true' borderBottom='2px solid white' paddingBottom='1rem' textAlign='justify'>Let <strong>trAIning</strong> become the best personal trainer for you, powered by Strava, enhanced with AI, you'll achive your goals in no time. </Typography>
             <Grid item xs={12} display='grid' justifyContent='flex-end'>
-            <Button variant="contained" size="large" endIcon={<RiRunLine />}>Go</Button>
+            <Link to='/about'><Button variant="contained" size="large" endIcon={<RiRunLine />}>
+              Go</Button></Link>
             </Grid>
           </Grid>
         </Grid>

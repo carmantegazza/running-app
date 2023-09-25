@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 import { Box, AppBar, Container, Toolbar, Button } from '@mui/material';
 import LoginCont from '../LoginCont/LoginCont';
 import logo from '../../media/logo.jpg'
@@ -22,13 +23,13 @@ const NavBar = () => {
 return (
   <AppBar position='static' sx={{ backgroundColor: 'white'}}>
    <Container maxWidth="xl">
-    <Toolbar disableGutters justifyContent='space-between'>
-     <Box
+    <Toolbar disableGutters sx= {{justifyContent: 'space-between'}}>
+     <Link to='/'><Box
         component="img"
         sx={{ height: 54 }}
         alt="Logo"
         src={logo}>
-      </Box>
+      </Box></Link>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1rem'}}>
             {pages.map((page) => (
               <Button
