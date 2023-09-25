@@ -1,4 +1,4 @@
-import { Grid, Box, Button, Paper } from "@mui/material"
+import { Grid, Button, Typography } from "@mui/material"
 import { RiRunLine } from "@react-icons/all-files/ri/RiRunLine"
 
 const Home = () => {
@@ -13,11 +13,13 @@ const Home = () => {
             padding='2rem'
             marginLeft='1rem'
             color='white'
-            fontSize='1.3rem'
-            textAlign='justify'
-            justifyContent='flex-end'>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque commodi, obcaecati facilis, accusantium quasi dolor earum possimus unde debitis nesciunt repellendus ad. Iure, rerum exercitationem. Suscipit repellat praesentium eos eaque?</p>
-            <Grid item xs={12} display='grid' justifyContent='center'>
+            fontSize='1.3rem'>
+            <Typography 
+                  variant='h3'
+                  paddingBottom='1rem'>
+                    Take your trAIning to a whole new level</Typography>
+            <Typography paragraph='true' borderBottom='2px solid white' paddingBottom='1rem' textAlign='justify'>Let <strong>trAIning</strong> become the best personal trainer for you, powered by Strava, enhanced with AI, you'll achive your goals in no time. </Typography>
+            <Grid item xs={12} display='grid' justifyContent='flex-end'>
             <Button variant="contained" size="large" endIcon={<RiRunLine />}>Go</Button>
             </Grid>
           </Grid>

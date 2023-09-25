@@ -40,7 +40,7 @@ return (
               </Button>
             ))}
           </Box>
-      <Box justifySelf='flex-end'>
+      <Box>
         <LoginCont />
       </Box>
     </Toolbar>
