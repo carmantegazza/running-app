@@ -1,5 +1,5 @@
-import { Box } from '@mui/material'
 import React from 'react'
+import { Box } from '@mui/material'
 import { RiMenu5Fill } from '@react-icons/all-files/ri/RiMenu5Fill'
 
 const NavBarMenu = () => {
