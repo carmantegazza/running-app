@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom'
 import { Grid, Button, Typography } from "@mui/material"
 import { RiRunLine } from "@react-icons/all-files/ri/RiRunLine"
+import Carrousel from '../Carrousel/Carrousel'
+import bgDark from '../../media/bgDark.jpg'
+import './Home.css'
 
 
 const Home = () => {
   return (
     <Grid  
         container 
-        height= '120vh'
-        direction='row'
-        className="mainBg">
-        <Grid item xs={12}>
+        direction='row'>
+        <Grid item xs={12}
+            height= '100vh'
+            className='shadow'
+            style={{backgroundImage: `url(${bgDark})`, backgroundSize: 'cover'}}>
           <Grid item xs={11} md={4}
             padding='2rem'
             marginLeft='1rem'
@@ -26,6 +30,16 @@ const Home = () => {
               Get Started</Button></Link>
             </Grid>
           </Grid>
+        </Grid>
+        <Grid container
+              height='100vh'
+              paddingY='5%'
+              justifyContent='center'
+              alignItems='center'
+              backgroundColor= 'rgba(63, 101, 154)'>
+                <Typography variant='h3' color='white' paddingX='30px' paddingBottom='10px' borderBottom='2px solid white' marginY='auto'>Discover tr<strong>AI</strong>ning</Typography>
+                <Typography variant='h5' color='white' justifySelf='center' >"Run to the Beat of Your Goals - Discover the Path to Greatness"</Typography>
+          <Carrousel />
         </Grid>
     </Grid>
   )
