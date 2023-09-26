@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { Box, Button } from '@mui/material'
+import { Link } from 'react-router-dom';
 
 const NavBarNav = () => {
 
@@ -19,13 +20,12 @@ const NavBarNav = () => {
   return (
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1rem'}}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ fontSize: '20px', my: 2, color: '#004aad', display: 'block' }}
-              >
-                {page}
-              </Button>
+                    <Button
+                        key={page}
+                        onClick={handleCloseNavMenu}
+                        sx={{ fontSize: '20px', my: 2, color: '#004aad', display: 'block', textDecoration: 'none' }}>
+                        {page}
+                    </Button>
             ))}
           </Box>
   )
