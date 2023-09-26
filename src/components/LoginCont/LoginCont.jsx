@@ -10,8 +10,8 @@ const LoginCont = () => {
                 <Button variant='outlined'  
                         startIcon={<HiUser 
                                     fontSize={35}
-                                    color="#7C83FD" />}>    
-                    Sign In</Button>
+                                    color="#004aad" />}>    
+                    Log In</Button>
             <Button>Sign Up</Button>
         </ButtonGroup>
       </Grid>
