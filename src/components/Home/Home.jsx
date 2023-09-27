@@ -38,7 +38,7 @@ const Home = () => {
               alignItems='center'
               backgroundColor= 'rgba(63, 101, 154)'>
                 <Typography variant='h3' color='white' paddingX='30px' paddingBottom='10px' borderBottom='2px solid white' marginY='auto'>Discover tr<strong>AI</strong>ning</Typography>
-                <Typography variant='h5' color='white' justifySelf='center' >"Run to the Beat of Your Goals - Discover the Path to Greatness"</Typography>
+                <Typography variant='h5' color='white' justifySelf='center' >Run to the beat of Your Goals</Typography>
           <Carrousel />
         </Grid>
     </Grid>
