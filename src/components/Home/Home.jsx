@@ -19,7 +19,8 @@ const Home = () => {
             padding='2rem'
             marginLeft='1rem'
             color='white'
-            fontSize='1.3rem'>
+            fontSize='1.3rem'
+            marginTop='8%'>
             <Typography 
                   variant='h3'
                   paddingBottom='1rem'>
