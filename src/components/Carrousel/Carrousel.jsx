@@ -48,16 +48,16 @@ const Carrousel = () => {
       autoplay={{delay: 3000}}
       modules={[EffectFade, Navigation, Pagination]}
       className="mySwiper"
-                style={{ height: "300px" }} >
+      style={{ height: '400px', width: '90%'}} >
       <SwiperSlide>
         <CarrouselSlide name={athletes.name} links={athletes.links}/>
-        </SwiperSlide>  
+      </SwiperSlide>  
       <SwiperSlide>
         <CarrouselSlide name={routes.name} links={routes.links}/>
         </SwiperSlide> 
       <SwiperSlide>
         <CarrouselSlide name={train.name} links={train.links}/>
-        </SwiperSlide> 
+      </SwiperSlide> 
     </Swiper>
   )
 }

@@ -14,15 +14,14 @@ const Home = () => {
         <Grid item xs={12}
             height= '100vh'
             className='shadow'
-            style={{backgroundImage: `url(${bgDark})`, backgroundSize: 'cover'}}>
-          <Grid item xs={11} md={4}
+            style={{backgroundImage: `url(${bgDark})`, backgroundSize: 'cover', backgroundPosition: '70%'}}>
+          <Grid item xs={11} md={5}
             padding='2rem'
-            marginLeft='1rem'
             color='white'
             fontSize='1.3rem'
-            marginTop='8%'>
+            marginTop='5%'>
             <Typography 
-                  variant='h3'
+                  variant='h2'
                   paddingBottom='1rem'>
                     Take your tr<strong>AI</strong>ning to the next level</Typography>
             <Typography paragraph={true} borderBottom='2px solid white' paddingBottom='1rem' textAlign='justify'>Let <strong>trAIning</strong> become the best personal trainer for you, powered by Strava, enhanced with AI, you'll be able to achive your goals in no time. </Typography>
@@ -33,13 +32,13 @@ const Home = () => {
           </Grid>
         </Grid>
         <Grid container
-              height='100vh'
+              height='auto'
               paddingY='5%'
               justifyContent='center'
               alignItems='center'
               backgroundColor= 'rgba(63, 101, 154)'>
-                <Typography variant='h3' color='white' paddingX='30px' paddingBottom='10px' borderBottom='2px solid white' marginY='auto'>Discover tr<strong>AI</strong>ning</Typography>
-                <Typography variant='h5' color='white' justifySelf='center' >Run to the beat of Your Goals</Typography>
+                <Typography variant='h2' color='white' marginTop= '30px' paddingBottom='10px' borderBottom='2px solid white' textAlign='center'>Discover tr<strong>AI</strong>ning</Typography>
+                <Typography variant='h3' color='white' paddingY= '20px' paddingX= '40px' justifySelf='center' textAlign='center'>Run to the beat of Your Goals</Typography>
           <Carrousel />
         </Grid>
     </Grid>

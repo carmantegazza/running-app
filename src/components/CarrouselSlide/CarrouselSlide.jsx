@@ -16,18 +16,21 @@ const CarrouselSlide = ({name, links}) => {
                  break;
             default:   
         }
-    })
+    }, [])
 
   return (
    
-    <Grid container height='100%' width= '85%' sx={{marginX: 'auto'}}>
-      <Grid container height='15%' width='100%' justifyContent='center' style={{backgroundColor: 'rgba(63, 101, 154)'}}>
-        <Typography variant='h4' color='white'>{text}</Typography></Grid>
+    <Grid container height='100%' sx={{ marginX: 'auto', width: {xs: '85%', md: '80%'}}}>
+      <Grid container height='auto' width='100%' justifyContent='center' style={{backgroundColor: 'rgba(63, 101, 154)'}}>
+        <Typography fontSize= {{xs: '30px', md: '45'}} color='white' textAlign='center'>{text}</Typography></Grid>
         <Grid container height='80%'>
-        {links.map((element) => (
-        <Grid item xs={6} lg={3} 
+        {links.map((element, index) => (
+        <Grid item 
+            key={index}
+            xs={6} lg={3} 
             style={{backgroundImage: `url(${element})`, 
-            backgroundSize: 'cover'}}>
+            backgroundSize: 'cover', 
+            backgroundAttachment: 'fixed'}}>
         </Grid>
     ))}        
       </Grid>
