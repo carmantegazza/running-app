@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import RoutesContainer from '../RoutesContainer/RoutesContainer'
 import { getRoutes } from '../../service/routeService'
-import { Box, Select, MenuItem, TextField, Button, FormControl, InputLabel, Grid } from '@mui/material'
+import { Box, Select, MenuItem, Button, FormControl, InputLabel, Grid, OutlinedInput, IconButton } from '@mui/material'
+import { MdClear } from '@react-icons/all-files/md/MdClear'
+
 
 const RoutesPage = () => {
 
@@ -26,12 +28,13 @@ const RoutesPage = () => {
        const filteredLoc = data.filter((route)  => route.location === e.target.value)
         setRoutesToRender(filteredLoc)
     }
+    setLocation(e.target.value)
    }
 
    const handleClick = () => {
      const searchedNames = data.filter((route) => (route.name.toLowerCase()).includes(inputSearch.current.value))
      const searchedLocations = data.filter((route) => (route.location.toLowerCase()).includes(inputSearch.current.value))
-     const searchedResults = searchedNames.concat(searchedLocations)
+     const searchedResults = [...new Set(searchedNames.concat(searchedLocations))]
      setRoutesToRender(searchedResults)
    
    }
@@ -42,24 +45,36 @@ const RoutesPage = () => {
 
   return (
     <Box>
-      <Grid container m='20px' justifyContent='center' alignItems='space-evenly'>
-      <TextField id="input-search" label="Search" variant="outlined" inputRef={inputSearch} placeholder='Search'/>
-      <Button variant="contained" onClick={handleClick}>Search</Button>
-      <Button variant="outlined" onClick={handleClickClear}>Clear</Button>
-    
-      <FormControl sx={{ minWidth: 300 }}>
-      <InputLabel id="location-select-label">Location</InputLabel>
-      <Select
-        labelId="location-select-label"
-        id="location-select"
-        value={location}
-        label="Location"
-        onChange={handleChange}
-      >
-        <MenuItem key='all' value='all' defaultValue={true}>All</MenuItem>
-        {locations.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
-      </Select>
-      </FormControl>
+      <Grid container py='4vh' px='1.5vw' justifyContent='center' alignItems='space-evenly' >
+        <Grid item xs={12} md={6} display='flex' justifyContent='center'>
+          <FormControl >
+            <InputLabel>Search</InputLabel>
+            <OutlinedInput
+            inputRef={inputSearch}
+            endAdornment={
+                <IconButton onClick={handleClickClear}>
+                  <MdClear color='#004aad'/>
+                </IconButton>
+                
+              
+
+            }> </OutlinedInput>
+          </FormControl>
+          <Button variant="contained" onClick={handleClick} sx={{height: '100%'}}>Search</Button>
+        </Grid>
+        <Grid item xs={12} md={6} display='flex' justifyContent='center'>
+          <FormControl sx={{ minWidth: 300 }}>
+          <InputLabel id="location-select-label">Location</InputLabel>
+          <Select
+            value={location}
+            label="Location"
+            onChange={handleChange}
+          >
+          <MenuItem key='all' value='all' defaultValue={true}>All</MenuItem>
+          {locations.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
+        </Select>
+        </FormControl>
+      </Grid>
 
       </Grid> 
       <RoutesContainer routes={routesToRender} />
