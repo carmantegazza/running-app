@@ -12,6 +12,7 @@ const RoutesPage = () => {
   const [location, setLocation] = useState('')
   const [routesToRender, setRoutesToRender] = useState([])
   const inputSearch = useRef(null)
+  const [locationFiltered, setLocationFiltered] = useState('')
    
   useEffect(() => {
      getRoutes().then((res) => {
@@ -22,6 +23,7 @@ const RoutesPage = () => {
   }, [])
 
    const handleChange = (e) => {
+    setLocationFiltered(e.target.value)
      if (e.target.value === 'all') {
        setRoutesToRender(data)
      } else {
@@ -32,11 +34,14 @@ const RoutesPage = () => {
    }
 
    const handleClick = () => {
-     const searchedNames = data.filter((route) => (route.name.toLowerCase()).includes(inputSearch.current.value))
-     const searchedLocations = data.filter((route) => (route.location.toLowerCase()).includes(inputSearch.current.value))
-     const searchedResults = [...new Set(searchedNames.concat(searchedLocations))]
-     setRoutesToRender(searchedResults)
-   
+    if (locationFiltered !== 'all') {
+      const searchedInLocation = data.filter((route) => route.location === locationFiltered)
+      const searchedNames = searchedInLocation.filter((route) => (route.name.toLowerCase()).includes(inputSearch.current.value))
+      setRoutesToRender(searchedNames)
+    } else {
+      const searchedNames = data.filter((route) => (route.name.toLowerCase()).includes(inputSearch.current.value))
+      setRoutesToRender(searchedNames)
+    }
    }
 
    const handleClickClear = () => {

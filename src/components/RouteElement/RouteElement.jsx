@@ -1,7 +1,9 @@
-import { Grid } from "@mui/material"
+import { Grid, Button } from "@mui/material"
+import { Link } from 'react-router-dom'
 
 const RouteElement = ({infoRoute}) => {
     return (
+        
             <Grid
                 item
                 sx={{
@@ -31,7 +33,10 @@ const RouteElement = ({infoRoute}) => {
 
                 >{infoRoute.name}</h3>
                 <p>{infoRoute.location}</p>
-            </Grid>
+                <Link to={`/routes/${infoRoute._id}`}>
+                    <Button>Go</Button></Link>
+             </Grid>
+             
     )
 }
 
