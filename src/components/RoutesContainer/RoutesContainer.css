@@ -1,0 +1,25 @@
+
+::-webkit-scrollbar {
+    width: 3px;
+    height: 10px
+  }
+
+::-webkit-scrollbar-track{
+    max-height: 20px;
+    box-shadow: inset 0px 0px 50px 100px rgba(255,255,255,0.2);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: rgba(63, 101, 154,1);
+    border-radius: 5;
+}
+
+
+.fade-in-element {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .fade-in-element.fade-in {
+    opacity: 1;
+  }

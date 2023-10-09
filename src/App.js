@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
-import RoutesContainer from "./components/Routes/RoutesContainer";
+import RoutesContainer from "./components/RoutesContainer/RoutesContainer";
 
 function App() {
   return (
