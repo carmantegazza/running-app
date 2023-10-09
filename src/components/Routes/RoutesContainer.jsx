@@ -1,6 +1,6 @@
 import { Box, FormControl, Select, InputLabel, MenuItem, TextField, Button } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
-
+import { getRoutes } from '../../service/routeService'
 
 const RoutesContainer = () => {
 
@@ -11,14 +11,16 @@ const [locations, setLocations] = useState([])
 const [filtered, setFiltered] = useState([])
  
  useEffect(() => {
-  fetch('http://localhost:4000/api/routes')
-  .then(response => response.json())
-  .then(data => setData(data.routes))
-  .then(locations => setLocations(data.map((route) => route.location)))
-  .then(filtered => setFiltered(data))
-  .catch(err => console.log(err))
+  getRoutes().then((res) => {
+    setLocations(res.map((route) => route.location))
+    setData(res)
+    setFiltered(res)
+    })
+
   
 }, [])
+
+console.log(data)
 
 //para el select
 const [location, setLocation] = useState('')
