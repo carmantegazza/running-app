@@ -1,69 +1,11 @@
-import { Box, FormControl, Select, InputLabel, MenuItem, TextField, Button, Container, Grid } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
-import { getRoutes } from '../../service/routeService'
+import { Box, Container, Grid } from '@mui/material'
 import RouteElement from '../RouteElement/RouteElement'
 import './RoutesContainer.css'
 
-const RoutesContainer = () => {
-
- const [data, setData] = useState([])
-
- //para el filtro de locations
-const [locations, setLocations] = useState([])
-const [filtered, setFiltered] = useState([])
- 
- useEffect(() => {
-  getRoutes().then((res) => {
-    setLocations(res.map((route) => route.location))
-    setData(res)
-    setFiltered(res)
-    })
-
-  
-}, [])
-
-console.log(data)
-
-//para el select
-const [location, setLocation] = useState('')
-
-const handleChange = (e) => {
-  if (e.target.value == 'all') {
-    setFiltered(data)
-  } else {
-    const filteredLoc = data.filter((route)  => route.location == e.target.value)
-    setFiltered(filteredLoc)
-  }
-  setLocation(e.target.value)
-}
-
-//para boton de busqueda
-const inputSearch = useRef(null)
-
-const handleClick = (e) => {
-  console.log(inputSearch.current.value)
-}
+const RoutesContainer = ({routes}) => {
 
 return (
     <Box>
-      <h2>Routes</h2>
-
-      <TextField id="input-search" label="Location" variant="outlined" inputRef={inputSearch}/>
-      <Button variant="contained" onClick={handleClick}>Search</Button>
-
-      <FormControl sx={{ minWidth: 300 }}>
-        <InputLabel id="location-select-label">Location</InputLabel>
-        <Select
-          labelId="location-select-label"
-          id="location-select"
-          value={location}
-          label="Location"
-          onChange={handleChange}
-        >
-          <MenuItem key='all' value='all' defaultValue={true}>All</MenuItem>
-          {locations.map( location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
-        </Select>
-      </FormControl>
       <Container sx={{ 
       width: '100vw',
       height: '84vh',
@@ -90,7 +32,6 @@ return (
             marginY:'10px',
 
           }}>
-
           <Grid
             container
             direction='column'
@@ -100,19 +41,16 @@ return (
               marginX: 'auto',
               gap: 5
             }}>
-             {filtered.length > 0 && 
-              filtered.map((route) => {
+             {routes.length > 0 && 
+              routes.map((route) => {
                 return (
               <RouteElement key={route.id} infoRoute={route} className='routeElement'></RouteElement>
-          )
-})}
-
+              )
+            })}
           </Grid>
         </div>
       </Box>
-
     </Container>
-
     </Box>
   )
 }

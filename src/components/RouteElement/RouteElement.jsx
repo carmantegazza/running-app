@@ -1,6 +1,6 @@
-import { Grid, Button, Typography } from "@mui/material"
+import { Grid } from "@mui/material"
 
-const RouteElement = (infoRoute) => {
+const RouteElement = ({infoRoute}) => {
     return (
             <Grid
                 item
@@ -29,7 +29,8 @@ const RouteElement = (infoRoute) => {
                     cursor: 'pointer'
                 }}
 
-                >{infoRoute.infoRoute.name}</h3>
+                >{infoRoute.name}</h3>
+                <p>{infoRoute.location}</p>
             </Grid>
     )
 }
