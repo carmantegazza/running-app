@@ -34,7 +34,7 @@ const RoutesPage = () => {
    }
 
    const handleClick = () => {
-    if (locationFiltered !== 'all') {
+    if (locationFiltered !== 'all' && locationFiltered) {
       const searchedInLocation = data.filter((route) => route.location === locationFiltered)
       const searchedNames = searchedInLocation.filter((route) => (route.name.toLowerCase()).includes(inputSearch.current.value))
       setRoutesToRender(searchedNames)
@@ -51,6 +51,20 @@ const RoutesPage = () => {
   return (
     <Box>
       <Grid container py='4vh' px='1.5vw' justifyContent='center' alignItems='space-evenly' >
+       
+        <Grid item xs={12} md={6} display='flex' justifyContent='center'>
+          <FormControl sx={{ minWidth: 300 }}>
+          <InputLabel id="location-select-label">Location</InputLabel>
+            <Select
+              value={location}
+              label="Location"
+              onChange={handleChange}
+              >
+              <MenuItem key='all' value='all' selected={true} >All</MenuItem>
+              {locations.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
+            </Select>
+          </FormControl>
+        </Grid>
         <Grid item xs={12} md={6} display='flex' justifyContent='center'>
           <FormControl >
             <InputLabel>Search</InputLabel>
@@ -67,20 +81,6 @@ const RoutesPage = () => {
           </FormControl>
           <Button variant="contained" onClick={handleClick} sx={{height: '100%'}}>Search</Button>
         </Grid>
-        <Grid item xs={12} md={6} display='flex' justifyContent='center'>
-          <FormControl sx={{ minWidth: 300 }}>
-          <InputLabel id="location-select-label">Location</InputLabel>
-          <Select
-            value={location}
-            label="Location"
-            onChange={handleChange}
-          >
-          <MenuItem key='all' value='all' defaultValue={true}>All</MenuItem>
-          {locations.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
-        </Select>
-        </FormControl>
-      </Grid>
-
       </Grid> 
       <RoutesContainer routes={routesToRender} />
     </Box>
