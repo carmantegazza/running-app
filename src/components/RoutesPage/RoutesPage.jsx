@@ -85,7 +85,7 @@ const RoutesPage = () => {
           <Button variant="contained" onClick={handleClick} sx={{height: '100%'}}>Search</Button>
         </Grid>
       </Grid> 
-      {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} />: <div>Error</div>}
+      {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} />: <div style={{width:'100%' , height:'84vh', display:'flex', textAlign:'center', justifyContent:'center'}} > No results found</div>}
     </Box>
   )
 }
