@@ -19,7 +19,8 @@ const RoutesPage = () => {
        setLocations([...new Set(res.map((route) => route.location))])
        setData(res)
        setRoutesToRender(res)
-       })     
+       })   
+       
   }, [])
 
    const handleChange = (e) => {
@@ -45,7 +46,9 @@ const RoutesPage = () => {
    }
 
    const handleClickClear = () => {
+    inputSearch.current.value = '';
     setRoutesToRender(data) 
+
   }
 
   return (
@@ -55,11 +58,11 @@ const RoutesPage = () => {
         <Grid item xs={12} md={6} display='flex' justifyContent='center'>
           <FormControl sx={{ minWidth: 300 }}>
           <InputLabel id="location-select-label">Location</InputLabel>
-            <Select
+            <Select 
               value={location}
               label="Location"
               onChange={handleChange}
-              >
+              > 
               <MenuItem key='all' value='all' selected={true} >All</MenuItem>
               {locations.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
             </Select>
@@ -82,7 +85,7 @@ const RoutesPage = () => {
           <Button variant="contained" onClick={handleClick} sx={{height: '100%'}}>Search</Button>
         </Grid>
       </Grid> 
-      <RoutesContainer routes={routesToRender} />
+      {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} />: <div>Error</div>}
     </Box>
   )
 }
