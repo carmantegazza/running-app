@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import NavBar from "./components/NavBar/NavBar";
-// import Footer from "./components/Footer/Footer";
-import StickyFooter from "./components/sticky-footer/sticky-footer";
-import MainCont from "./components/MainCont/MainCont";
+import Footer from "./components/Footer/Footer";
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
+import RoutesPage from "./components/RoutesPage/RoutesPage";
+import RouteDetails from "./components/RouteDetails/RouteDetails";
 
 function App() {
   return (
@@ -13,9 +13,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/routes" element={<RoutesPage />}></Route>
+          <Route path="/routes/:id" element={<RouteDetails />}></Route>
         </Routes>
-        <StickyFooter/>
-        {/* <Footer /> */}
+        <Footer />
     </BrowserRouter>
   );
 }
