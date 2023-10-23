@@ -2,22 +2,30 @@ import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { getRoutes } from '../../service/routeService'
-import { Box, Typography, Grid, Paper, Container } from '@mui/material'
+import { Typography, Grid, Paper } from '@mui/material'
+import EventButton from '../EventButton/EventButton'
+import { getEventsFromOneRoute } from '../../service/eventService'
 
 const RouteDetails = () => {
-  const [data, setData] = useState();
+  const [routeData, setRouteData] = useState();
+  const [eventData, setEventData] = useState();
   const { id } = useParams()
 
   useEffect(() => {
     getRoutes().then((res) => {
-      setData(res.filter((route) => route._id === id))
+      setRouteData(res.filter((route) => route._id === id))
     })
 
-  }, [id])
+    getEventsFromOneRoute().then((res) => {
+    setEventData(res)
+    console.log(eventData)
+    
+  })
+    
+    
+  },[id])
 
-  console.log(data)
-
-  const paperStyle = {
+ const paperStyle = {
     padding: '20px',
     backgroundColor: 'rgba(63, 101, 154)',
     borderRadius: '30px',
@@ -26,55 +34,55 @@ const RouteDetails = () => {
     flexDirection: 'column'
   };
 
-  const containerStyle = {
-    padding: '20px',
-    backgroundColor: 'lightblue',
-    borderRadius: '30px',
-    boxShadow: '0 3px 3px rgb(103, 103, 103)',
-
-  };
-
+ 
   return (
-    // <Box>
-    //     { data && (
-    //     <Box>
-    //     <Typography color='blue' variant="h5">Route Name: {data[0].name}</Typography>
-    //     <Typography color='blue' variant="h5">Distance: {data[0].distance} metros</Typography>
-    //     <Typography color='blue' variant="h5">Location: {data[0].location}</Typography>
-    //     </Box>
-    //     ) }
-    // </Box>
-    <Container sx={{ 
-      height: '84vh',
-      boxSizing:'border-box', 
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
+   
+    // <Container sx={{ 
+    //   width: '80vh',
+    //   height: '84vh',
+    //   boxSizing:'border-box', 
+    //   display: 'flex',
+    //   justifyContent: 'center',
+    //   alignItems: 'center'
+    // }}>
 
-      <Grid container
-        direction='row' gap='10px' padding='10px' justifyContent='center' >
+      <Grid container 
+        sx={{flex:'1', direction:'row', gap:'10px', padding:'10px', justifyContent:'center' , boxSizing:'border-box' , display:'flex' , alignItems:'center', height:'67vh'}} >
+        <div style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly', height:'100%'}}>
         {/* Card a la izquierda */}
-        <Grid item xs={4} >
+        <Grid item sx={{width:500}}>
           <Paper style={paperStyle}>
-            {data && (
+            {routeData && (
               <>
-                <Typography color='white' variant="h5">Route Name: {data[0].name}</Typography>
-                <Typography color='white' variant="h5">Distance: {data[0].distance} metres</Typography>
+                <Typography color='white' variant="h5">Route Name: {routeData[0].name}</Typography>
+                <Typography color='white' variant="h5">Distance: {routeData[0].distance} metres</Typography>
                 {/* <Typography color='white' variant="h5">Distance: <span style={{ color: 'black' }}>{data[0].distance} metres</span></Typography> */}
 
-                <Typography color='white' variant="h5">Location: {data[0].location}</Typography>
-                <Typography color='white' variant="h5">Difficulty: {data[0].difficulty}</Typography>
-                <Typography color='white' variant="h5">Elevation Gain: {data[0].elevation_gain}</Typography>
-                <Typography color='white' variant="h5">Estimated Moving Time: {data[0].estimated_moving_time}</Typography>
+                <Typography color='white' variant="h5">Location: {routeData[0].location}</Typography>
+                <Typography color='white' variant="h5">Difficulty: {routeData[0].difficulty}</Typography>
+                <Typography color='white' variant="h5">Elevation Gain: {routeData[0].elevation_gain}</Typography>
+                <Typography color='white' variant="h5">Estimated Moving Time: {routeData[0].estimated_moving_time}</Typography>
               </>
             )}
           </Paper>
         </Grid>
         {/* Card a la derecha */}
-        <Grid item xs={7}>
+        {/* Card de events */}
+        <Grid item sx={{width:500}}>
+          <Paper style={paperStyle}>
+            {routeData && (
+              <>
+                <EventButton />
+              </>
+            )}
+          </Paper>
+        </Grid>
+        {/* Card de events */}
+        </div>
+
+        <Grid item xs={6} paddingLeft={10}>
           <div style={{
-            backgroundImage: data ? `url(${data[0].image})` : 'none',
+            backgroundImage: routeData ? `url(${routeData[0].image})` : 'none',
             backgroundSize: 'cover', // Otras propiedades de estilo de fondo
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -88,7 +96,7 @@ const RouteDetails = () => {
 
       </Grid>
 
-    </Container>
+    // </Container>
 
   )
 }
