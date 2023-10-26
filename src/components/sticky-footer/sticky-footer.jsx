@@ -10,6 +10,7 @@ import { AiOutlineFacebook } from '@react-icons/all-files/ai/AiOutlineFacebook';
 import { FiInstagram } from '@react-icons/all-files/fi/FiInstagram';
 import { FiYoutube } from '@react-icons/all-files/fi/FiYoutube';
 import logo from '../../media/logo.png'
+import '../../index.css';
 
 function Copyright() {
   return (
@@ -24,25 +25,22 @@ function Copyright() {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function StickyFooter() {
   return (
     <ThemeProvider theme={defaultTheme}>
+     <CssBaseline />
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '5vh'
+          minHeight: '10vh'
         }}
       > 
-       <CssBaseline />
        
-      
        <Container component="main" sx={{ mt: 4, mb: 1 }} maxWidth="sm">
-       
-          <Grid container spacing={5}>
+        <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>
             <Box
               component="img"

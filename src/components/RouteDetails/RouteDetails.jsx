@@ -2,8 +2,9 @@ import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { getRoutes } from '../../service/routeService'
-import { Typography, Grid, Paper } from '@mui/material'
+import { Typography, Grid, Paper, Button } from '@mui/material'
 import { getEventsFromOneRoute } from '../../service/eventService'
+import { Link } from 'react-router-dom'
 
 const RouteDetails = () => {
   const [routeData, setRouteData] = useState(); // Estado para almacenar datos de rutas
@@ -17,8 +18,8 @@ const RouteDetails = () => {
 
    const fetchEventsData = async () => {
       try {
-        const eventsrouteId = id; // Utilizamos el 'id' de la URL
-        const data = await getEventsFromOneRoute(eventsrouteId);
+        const routeId = id; // Utilizamos el 'id' de la URL
+        const data = await getEventsFromOneRoute(routeId);
         setEventData(data); // Actualizamos el estado con los datos de eventos
       } catch (error) {
         console.error('Error al obtener los datos de eventos:', error);
@@ -65,14 +66,17 @@ const RouteDetails = () => {
           {eventsData && (
       <>
         <Typography color="white" variant="h5">Events on this Route:</Typography>
-        {eventsData.map((event, index) => (
-          <div key={index}>
-            <Typography color="white" variant="h6">Event  {index + 1}:</Typography>
-            <Typography color="white" variant="body1">Name: {event.name}</Typography>
-            <Typography color="white" variant="body1">Organizer: {event.organizer}</Typography>
-            </div>
-        ))}
-      </>
+        { eventsData.length ? (
+            eventsData.map((event, index) => (
+              <div key={index}>
+                <Typography color="white" variant="h6">Event  {index + 1}:</Typography>
+                <Typography color="white" variant="body1">Name: {event.name}</Typography>
+                <Link to={`/events/${eventsData._id}`}>
+                     <Button>More Info</Button></Link>
+                </div>
+            ))) : (<Typography color="white" variant="body1">No events on this route</Typography>) 
+          } 
+        </>
     )}
           </Paper>
         </Grid>
