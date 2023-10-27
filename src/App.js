@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import RoutesPage from "./components/RoutesPage/RoutesPage";
 import RouteDetails from "./components/RouteDetails/RouteDetails";
 import EventDetails from "./components/EventDetails/EventDetails";
-import Stickyfooter from "./components/Sticky-footer/sticky-footer";
+// import Stickyfooter from "./components/Sticky-footer/sticky-footer";
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
@@ -42,7 +42,7 @@ export default function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           </Routes>
-        <Stickyfooter/>
+        {/* <Stickyfooter/> */}
    
    </div>
   );

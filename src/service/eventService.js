@@ -7,4 +7,15 @@
      return [];
    }
  };
+
+
+ export const getEvent = async (eventId) => {
+  try {
+     const request =  await fetch(`http://localhost:4000/api/events/${eventId}`)
+    const data = await request.json()
+    return data.event
+  } catch (error) {
+       return []
+  }
+}
  

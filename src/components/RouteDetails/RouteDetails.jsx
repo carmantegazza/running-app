@@ -12,15 +12,17 @@ const RouteDetails = () => {
   const { id } = useParams(); // Obtiene el parámetro 'id' de la URL
 
   useEffect(() => {
-        getRoutes().then((res) => {
-          setRouteData(res.filter((route) => route._id === id))
-        })
+    getRoutes().then((res) => {
+      setRouteData(res.filter((route) => route._id === id))
+    })
 
-   const fetchEventsData = async () => {
+    const fetchEventsData = async () => {
       try {
         const routeId = id; // Utilizamos el 'id' de la URL
         const data = await getEventsFromOneRoute(routeId);
         setEventData(data); // Actualizamos el estado con los datos de eventos
+
+        console.log(data)
       } catch (error) {
         console.error('Error al obtener los datos de eventos:', error);
       }
@@ -32,7 +34,7 @@ const RouteDetails = () => {
   // El componente renderiza aquí, usando 'routeData' y 'eventsData' si están disponibles
 
 
- const paperStyle = {
+  const paperStyle = {
     padding: '20px',
     backgroundColor: 'rgba(63, 101, 154)',
     borderRadius: '30px',
@@ -41,12 +43,12 @@ const RouteDetails = () => {
     flexDirection: 'column'
   };
   return (
-   
-   <Grid container 
-        sx={{flex:'1', direction:'row', gap:'10px', padding:'10px', justifyContent:'center' , boxSizing:'border-box' , display:'flex' , alignItems:'center', height:'67vh'}} >
-        <div style={{display:'flex', flexDirection:'column', justifyContent:'space-evenly', height:'100%'}}>
+
+    <Grid container
+      sx={{ flex: '1', direction: 'row', gap: '10px', padding: '10px', justifyContent: 'center', boxSizing: 'border-box', display: 'flex', alignItems: 'center', height: '67vh' }} >
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', height: '100%' }}>
         {/* Card a la izquierda */}
-        <Grid item sx={{width:500}}>
+        <Grid item sx={{ width: 500 }}>
           <Paper style={paperStyle}>
             {routeData && (
               <>
@@ -61,41 +63,43 @@ const RouteDetails = () => {
           </Paper>
         </Grid>
         {/* Card a la derecha */}
-          <Grid item sx={{width:500}}>
+        <Grid item sx={{ width: 500 }}>
           <Paper style={paperStyle}>
-          {eventsData && (
-      <>
-        <Typography color="white" variant="h5">Events on this Route:</Typography>
-        { eventsData.length ? (
-            eventsData.map((event, index) => (
-              <div key={index}>
-                <Typography color="white" variant="h6">Event  {index + 1}:</Typography>
-                <Typography color="white" variant="body1">Name: {event.name}</Typography>
-                <Link to={`/events/${eventsData._id}`}>
-                     <Button>More Info</Button></Link>
-                </div>
-            ))) : (<Typography color="white" variant="body1">No events on this route</Typography>) 
-          } 
-        </>
-    )}
+            {eventsData && (
+              <>
+                <Typography color="white" variant="h5">Events on this Route:</Typography>
+                {eventsData.length ? (
+                  eventsData.map((event, index) => (
+                    <div key={index}>
+                      <Typography color="white" variant="h6">Event  {index + 1}:</Typography>
+                      <Typography color="white" variant="body1">Name: {event.name}</Typography>
+                      <Typography color="white" variant="body1">ID: {event._id}</Typography>
+                      <Link to={`/events/${event._id}`}>
+                        <Button style={{ color: 'white' }}>More Info</Button>
+                      </Link>
+                    </div>
+                  ))) : (<Typography color="white" variant="body1">No events on this route</Typography>)
+                }
+              </>
+            )}
           </Paper>
         </Grid>
         {/* Card de events */}
-        </div>
+      </div>
 
-        <Grid item xs={6} paddingLeft={10}>
-          <div style={{
-            backgroundImage: routeData ? `url(${routeData[0].image})` : 'none',
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            height: '500px', 
-            borderRadius: '30px',
-            boxShadow: '0 3px 3px rgb(103, 103, 103)',
-          }}>
-          </div>
-        </Grid>
+      <Grid item xs={6} paddingLeft={10}>
+        <div style={{
+          backgroundImage: routeData ? `url(${routeData[0].image})` : 'none',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          height: '500px',
+          borderRadius: '30px',
+          boxShadow: '0 3px 3px rgb(103, 103, 103)',
+        }}>
+        </div>
       </Grid>
+    </Grid>
   )
 }
 
