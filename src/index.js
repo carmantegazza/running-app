@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux'
 import mainReducer from './redux/reducers/mainReducer';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const reduxStore = configureStore({ reducer: mainReducer })
 
@@ -14,9 +15,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
  <Provider store={reduxStore}>
+  <GoogleOAuthProvider clientId="478026476083-p7etbhheefgflbe53eeo4ffd00agv7ck.apps.googleusercontent.com">
     <BrowserRouter>
       <App />
     </BrowserRouter>
+    </GoogleOAuthProvider>
   </Provider>
 );
 

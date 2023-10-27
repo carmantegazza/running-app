@@ -1,10 +1,8 @@
 import React from 'react';
-// import '../styles/App.css'
 import Snackbar from '@mui/material/Snackbar';
 import Stack from '@mui/material/Stack';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-//material ui
 import MuiAlert from '@mui/material/Alert';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -60,7 +58,7 @@ function Snack() {
                             (<>{showSnackbar.message}</>) :
                             <ul>
                                 {showSnackbar.message.map(message =>
-                                    <li>{message}</li>
+                                    <li>{message.message}</li>
                                 )}
                             </ul>
                         }
