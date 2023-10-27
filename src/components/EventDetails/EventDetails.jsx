@@ -1,22 +1,21 @@
 import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
-
+import { getEvent } from '../../service/eventService'
 import { Typography, Grid, Paper, Container } from '@mui/material'
 
 const EventDetails = () => {
-  const [data, setData] = useState();
-  const { id } = useParams()
+  const [eventData, setEventData] = useState(); // Estado para almacenar datos de eventos
+  const { id } = useParams(); // Obtiene el parámetro 'id' de la URL
 
   useEffect(() => {
-    // getEventsFromOneRoute().then((res) => {
-    //   setData(res.filter((events) => events._id === id))
-    //   console.log(data)
-    // })
+    getEvent(id).then((res) => {
+      setEventData(res); // Update the state with the response data
+    });
 
   }, [id])
 
- 
+
 
   const paperStyle = {
     padding: '20px',
@@ -36,9 +35,9 @@ const EventDetails = () => {
   };
 
   return (
-    <Container sx={{ 
+    <Container sx={{
       height: '84vh',
-      boxSizing:'border-box', 
+      boxSizing: 'border-box',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
@@ -47,32 +46,17 @@ const EventDetails = () => {
       <Grid container
         direction='row' gap='10px' padding='10px' justifyContent='center' >
         {/* Card a la izquierda */}
-        <Grid item xs={4} >
+        <Grid item xs={7} >
           <Paper style={paperStyle}>
-            {data && (
+            {eventData && (
               <>
-                <Typography color='white' variant="h5">Event Name: {data[1].name}</Typography>
-                <Typography color='white' variant="h5">Organizer: {data[1].organizer}</Typography>
-                
+                <Typography color='white' variant="h5">Event Name: {eventData.name}</Typography>
+                <Typography color='white' variant="h5">Organizer: {eventData.organizer}</Typography>
+
               </>
             )}
           </Paper>
         </Grid>
-        {/* Card a la derecha */}
-        <Grid item xs={7}>
-          <div style={{
-            backgroundImage: data ? `url(${data[1].organizer_img})` : 'none',
-            backgroundSize: 'cover', // Otras propiedades de estilo de fondo
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            height: '500px', // Ajusta según tus necesidades
-            // width: '100vw',
-            borderRadius: '30px',
-            boxShadow: '0 3px 3px rgb(103, 103, 103)',
-          }}>
-          </div>
-        </Grid>
-
       </Grid>
 
     </Container>
