@@ -45,7 +45,7 @@ export default function SignUp() {
         };
        
             dispatch(userActions.signUpUser(userData))
-            navigate('/signin')
+           navigate('/signin')
     };
 
 

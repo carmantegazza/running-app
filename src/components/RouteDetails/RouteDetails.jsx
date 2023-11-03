@@ -73,7 +73,6 @@ const RouteDetails = () => {
                     <div key={index}>
                       <Typography color="white" variant="h6">Event  {index + 1}:</Typography>
                       <Typography color="white" variant="body1">Name: {event.name}</Typography>
-                      <Typography color="white" variant="body1">ID: {event._id}</Typography>
                       <Link to={`/events/${event._id}`}>
                         <Button style={{ color: 'white' }}>More Info</Button>
                       </Link>

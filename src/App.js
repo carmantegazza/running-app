@@ -10,21 +10,25 @@ import Stickyfooter from "./components/Sticky-footer/sticky-footer";
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
+import { useEffect } from "react";
 
 export const urlBackend = "http://localhost:4000";
-
 export default function App() {
-  const dispatch = useDispatch();
-  const showNav = useSelector((store) => store.appReducer.showNav);
-  const user = useSelector((store) => store.userReducer.user);
 
+const user = useSelector((store) => store.userReducer.user);
+const userToken = localStorage.getItem('token') 
+
+useEffect(() => {
+  if(userToken !== null){
+    console.log('Usuario Logueado')}
+    else{
+      console.log('Usuario no Logueado')
+    }
+  },[])
+  
   return (
     <div className="App">
       <Snack />
-      <div
-        className="nav_menuOpen"
-        onMouseOver={() => dispatch({ type: "showNav", payload: true })}
-      ></div>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

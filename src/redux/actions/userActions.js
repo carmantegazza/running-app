@@ -10,7 +10,7 @@ const userActions = {
             email: user.email,
             password: user.password,
             from: user.from,
-            aplication: "heroes"
+            aplication: "training-app"
         }
         return async (dispatch, getState) => {
             const res = await axios.post(`${urlBackend}/api/users/auth/signup`, { userData })
@@ -24,17 +24,18 @@ const userActions = {
                 }
             });
         }
-
     },
     signInUser: (userData) => {
 
         return async (dispatch, getState) => {
 
             const user = await axios.post(`${urlBackend}/api/users/auth/signin`, { userData })
-            console.log(user)
+            
             if (user.data.success) {
+                localStorage.setItem('token', user.data.response.token);
                 dispatch({ type: 'user', payload: user.data.response.userData });
             }
+            
             dispatch({
                 type: 'message',
                 payload: {
@@ -45,15 +46,17 @@ const userActions = {
             });
         }
     },
+    
     SignOutUser: (closeuser) => {
         return async (dispatch, getState) => {
-            const user = await axios.post(`${urlBackend}/api/auth/signout`, { closeuser })
-            localStorage.removeItem('token')
+          try {
+            const res = await axios.post(`${urlBackend}/api/users/auth/signout`, closeuser);
+            localStorage.removeItem('token');
             dispatch({ type: 'user', payload: null });
-            return user
-        }
-
-    },
-
+            return res;
+          } catch (error) {
+            console.error(error);
+          }
+        }}
 }
 export default userActions;

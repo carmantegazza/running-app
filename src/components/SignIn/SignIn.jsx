@@ -1,6 +1,4 @@
 import * as React from 'react';
-// import '../styles/AppBarMUI.css'
-// import '../styles/Forms.css'
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -24,21 +22,23 @@ export default function SignIn() {
             const userData = {
                 email: data.get('email'),
                 password: data.get('password'),
-                from:"signUp-form"
+                from:"signUp-form",
+                aplication:"training-app"
             };
             dispatch(userActions.signInUser(userData))
         };
         const googleSubmit = async (event) => {
-    
+            
             const token = event.credential;
             const decoded = await jwtDecode(token);
             console.log(decoded)
             const userData = {
                 email: decoded.email,
                 password: decoded.family_name+"AMD23google",
-                from: "google"
+                from: "google",
+                aplication:"training-app"                
             };
-           
+          
                 dispatch(userActions.signInUser(userData))
         };
     
@@ -104,7 +104,8 @@ export default function SignIn() {
                                 onError={() => {
                                     console.log('Login Failed');
                                 }}
-                            />;
+                            />
+                            
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
