@@ -11,19 +11,21 @@ import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
 import { useEffect } from "react";
+import userActions from "./redux/actions/userActions";
 
 export const urlBackend = "http://localhost:4000";
+
 export default function App() {
+const dispatch = useDispatch();
 
 const user = useSelector((store) => store.userReducer.user);
 const userToken = localStorage.getItem('token') 
 
 useEffect(() => {
   if(userToken !== null){
-    console.log('Usuario Logueado')}
-    else{
-      console.log('Usuario no Logueado')
+    dispatch(userActions.VerificarToken(userToken)) 
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
   return (

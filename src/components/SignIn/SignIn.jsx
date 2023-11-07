@@ -16,30 +16,30 @@ import { jwtDecode } from "jwt-decode";
 export default function SignIn() {
     const dispatch = useDispatch()
     
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            const data = new FormData(event.currentTarget);
-            const userData = {
-                email: data.get('email'),
-                password: data.get('password'),
-                from:"signUp-form",
-                aplication:"training-app"
-            };
-            dispatch(userActions.signInUser(userData))
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const userData = {
+            email: data.get('email'),
+            password: data.get('password'),
+            from:"signUp-form",
+            aplication: "training-app"
         };
-        const googleSubmit = async (event) => {
-            
-            const token = event.credential;
-            const decoded = await jwtDecode(token);
-            console.log(decoded)
-            const userData = {
-                email: decoded.email,
-                password: decoded.family_name+"AMD23google",
-                from: "google",
-                aplication:"training-app"                
-            };
-          
-                dispatch(userActions.signInUser(userData))
+        dispatch(userActions.signInUser(userData))
+    };
+    const googleSubmit = async (event) => {
+
+        const token = event.credential;
+        const decoded = await jwtDecode(token);
+        console.log(decoded)
+        const userData = {
+            email: decoded.email,
+            password: decoded.family_name+"AMD23google",
+            from: "google",
+            aplication: "training-app"
+        };
+       
+            dispatch(userActions.signInUser(userData))
         };
     
         return (

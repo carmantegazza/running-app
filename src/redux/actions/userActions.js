@@ -33,7 +33,7 @@ const userActions = {
             
             if (user.data.success) {
                 localStorage.setItem('token', user.data.response.token);
-                dispatch({ type: 'user', payload: user.data.response.userData });
+                dispatch({ type: 'user', payload: user.data.response.dataUser });
             }
             
             dispatch({
@@ -47,16 +47,51 @@ const userActions = {
         }
     },
     
-    SignOutUser: (closeuser) => {
+     SignOutUser: (closeuser) => {
         return async (dispatch, getState) => {
-          try {
-            const res = await axios.post(`${urlBackend}/api/users/auth/signout`, closeuser);
-            localStorage.removeItem('token');
+            const user = await axios.post(`${urlBackend}/auth/signOut`, { closeuser })
+            localStorage.removeItem('token')
             dispatch({ type: 'user', payload: null });
-            return res;
-          } catch (error) {
-            console.error(error);
-          }
-        }}
+            return user
+        }
+    },
+    VerificarToken: (token) => {
+        return async (dispatch, getState) => {
+            await axios.get(`${urlBackend}/api/users/auth/signInToken`, {
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+                .then(user => {
+                    console.log(user)
+                    if (user.data.success) {
+                        dispatch({ type: "user", payload: user.data.response })
+                        dispatch({
+                            type: "message",
+                            payload:
+                            {
+                                view: true,
+                                message: user.data.message,
+                                success: user.data.success
+                            }
+                        })
+                    }else {
+                        console.log(user)
+                        localStorage.removeItem("token")}
+                }).catch(error =>{
+                    console.log(error)
+                    if(error.response.status === 401){
+                        dispatch({
+                            type: "message",
+                            payload:
+                            {
+                                view: true,
+                                message: "Pleasr Sign In again",
+                                success: false
+                            }
+                        })
+                        localStorage.removeItem("token")
+                    }
+                })
+        }
+    }
 }
 export default userActions;
