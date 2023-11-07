@@ -49,7 +49,7 @@ const userActions = {
     
      SignOutUser: (closeuser) => {
         return async (dispatch, getState) => {
-            const user = await axios.post(`${urlBackend}/auth/signOut`, { closeuser })
+            const user = await axios.post(`${urlBackend}/api/user/auth/signOut`, { closeuser })
             localStorage.removeItem('token')
             dispatch({ type: 'user', payload: null });
             return user
@@ -58,7 +58,7 @@ const userActions = {
     VerificarToken: (token) => {
         return async (dispatch, getState) => {
             await axios.get(`${urlBackend}/api/users/auth/signInToken`, {
-                headers: { 'Authorization': 'Bearer ' + token }
+                headers: { 'Authorization': 'Bearer ' +token }
             })
                 .then(user => {
                     console.log(user)
@@ -75,7 +75,7 @@ const userActions = {
                         })
                     }else {
                         console.log(user)
-                        localStorage.removeItem("token")}
+                        localStorage.removeItem('token')}
                 }).catch(error =>{
                     console.log(error)
                     if(error.response.status === 401){
@@ -84,11 +84,11 @@ const userActions = {
                             payload:
                             {
                                 view: true,
-                                message: "Pleasr Sign In again",
+                                message: "Please Sign In again",
                                 success: false
                             }
                         })
-                        localStorage.removeItem("token")
+                        localStorage.removeItem('token')
                     }
                 })
         }
