@@ -52,8 +52,10 @@ const RoutesPage = () => {
   }
 
   return (
-    <Box>
-      <Grid container py='4vh' px='1.5vw' justifyContent='center' alignItems='space-evenly' >
+    <Box style={{
+      height:'70vh'
+    }}>
+      <Grid container display="flex" px='1.5vw' justifyContent='center' alignItems='space-evenly' gap="20px" paddingTop="10px" >
        
         <Grid item xs={12} md={6} display='flex' justifyContent='center'>
           <FormControl sx={{ minWidth: 300 }}>
@@ -85,7 +87,7 @@ const RoutesPage = () => {
           <Button variant="contained" onClick={handleClick} sx={{height: '100%'}}>Search</Button>
         </Grid>
       </Grid> 
-      {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} />: <div style={{width:'100%' , height:'84vh', display:'flex', textAlign:'center', justifyContent:'center'}} > No results found</div>}
+      {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} />: <div style={{width:'100%', display:'flex', textAlign:'center', justifyContent:'center'}} > No results found</div>}
     </Box>
   )
 }

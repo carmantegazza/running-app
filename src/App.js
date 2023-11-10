@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RoutesPage from "./components/RoutesPage/RoutesPage";
 import RouteDetails from "./components/RouteDetails/RouteDetails";
 import EventDetails from "./components/EventDetails/EventDetails";
-import Stickyfooter from "./components/Sticky-footer/sticky-footer";
+import Stickyfooter from "./components/sticky-footer/sticky-footer";
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
@@ -32,7 +32,12 @@ useEffect(() => {
     <div className="App">
       <Snack />
       <NavBar />
-      <Routes>
+      {/* <div style={{
+        height:'200vh',
+        display:'flex',
+        justifyContent:'center'
+      }}> */}
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/routes" element={<RoutesPage />}></Route>
@@ -41,7 +46,12 @@ useEffect(() => {
         {!user && <Route path="/signin" element={<SignIn />} />}
         {!user && <Route path="/signup" element={<SignUp />} />}
       </Routes>
-      <Stickyfooter />
+      {/* </div> */}
+      
+      <Stickyfooter style={{
+        position:'absolute',
+        bottom:'0'
+      }}/>
     </div>
   );
 }
