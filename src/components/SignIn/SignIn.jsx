@@ -125,9 +125,10 @@ export default function SignIn() {
                                     color='secondary'
                                 />
                                 <FormControl sx={{width:'100%'}} variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                    <InputLabel htmlFor="dynamic-password-TextField">Password</InputLabel>
                                     <OutlinedInput
-                                        id="outlined-adornment-password"
+                                        id="password"
+                                        name='password'
                                         type={showPassword ? 'text' : 'password'}
                                         endAdornment={
                                             <InputAdornment position="end">

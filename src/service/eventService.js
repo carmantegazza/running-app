@@ -1,4 +1,4 @@
- export const getEventsFromOneRoute = async (routeId) => {
+export const getEventsFromOneRoute = async (routeId) => {
    try {
      const request = await fetch(`http://localhost:4000/api/eventforroute/${routeId}`);
      const data = await request.json();

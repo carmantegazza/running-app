@@ -2,9 +2,7 @@ import axios from 'axios';
 import { urlBackend } from '../../App';
 
 const userActions = {
-
     signUpUser: (user) => {
-
         const userData = {
             fullName: user.firstName + " " + user.lastName,
             email: user.email,
@@ -26,11 +24,12 @@ const userActions = {
         }
     },
     signInUser: (userData) => {
-
+        
         return async (dispatch, getState) => {
-
+            console.log(userData)
             const user = await axios.post(`${urlBackend}/api/users/auth/signin`, { userData })
-            
+           
+            console.log(user.data.success)
             if (user.data.success) {
                 localStorage.setItem('token', user.data.response.token);
                 dispatch({ type: 'user', payload: user.data.response.dataUser });
@@ -49,12 +48,10 @@ const userActions = {
     },
     
      SignOutUser: (closeuser) => {
-        console.log("Se llamo")
         localStorage.removeItem('token')
         return async (dispatch, getState) => {
-            // const user = await axios.post(`${urlBackend}/api/user/auth/signOut`, { closeuser })
             dispatch({ type: 'user', payload: null });
-            // return user
+            dispatch({ type: 'userChange', payload: false});
         }
     },
     VerificarToken: (token) => {

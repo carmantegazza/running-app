@@ -14,6 +14,7 @@ const EventDetails = () => {
     });
 
   }, [id])
+  console.log(eventData)
 
 
 
@@ -35,31 +36,39 @@ const EventDetails = () => {
   };
 
   return (
-    <Container sx={{
-      height: '84vh',
-      boxSizing: 'border-box',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
 
-      <Grid container
-        direction='row' gap='10px' padding='10px' justifyContent='center' >
-        {/* Card a la izquierda */}
-        <Grid item xs={7} >
+    <Grid container
+      sx={{ gap: '20px', padding: '10px', justifyContent: 'center', boxSizing: 'border-box', display: 'flex', alignItems: 'center', height: '67vh' }} >
+      <Grid >
+        <div style={{
+          backgroundImage: eventData ? `url(${eventData.organizer_img})` : 'none',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          height: '250px',
+          width: '250px',
+          borderRadius: '30px',
+          boxShadow: '0 3px 3px rgb(103, 103, 103)'
+
+        }}>
+        </div>
+      </Grid>
+
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* Card a la derecha */}
+        <Grid item sx={{ width: 500, height:'100%' }}>
           <Paper style={paperStyle}>
             {eventData && (
               <>
                 <Typography color='white' variant="h5">Event Name: {eventData.name}</Typography>
                 <Typography color='white' variant="h5">Organizer: {eventData.organizer}</Typography>
-
               </>
             )}
           </Paper>
         </Grid>
-      </Grid>
+      </div>
 
-    </Container>
+    </Grid>
 
   )
 }
