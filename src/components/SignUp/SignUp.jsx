@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -16,6 +16,22 @@ import { jwtDecode } from "jwt-decode";
 export default function SignUp() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [isHovered, setIsHovered] = useState(false);
+    // const [showPassword,setShowPassword] = useState(false);
+
+    // const handleShowPassword = () => {
+    //     setShowPassword(true)
+    //     showPassword ?  
+
+    // }
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+      };
+    
+      const handleMouseLeave = () => {
+        setIsHovered(false);
+      };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -50,8 +66,14 @@ export default function SignUp() {
 
 
     return (
-        <div className='form_container'>
-            <div className='complement_container'>
+        <div className='form_container'
+             style={{
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            height:'70vh'
+        }}>
+            <div className='complement_container' >
                 <div className='letter_container'>
                     <p>
                         
@@ -59,7 +81,16 @@ export default function SignUp() {
                 </div>
                 <div className='image_container'></div>
             </div>
-            <Container component="main" maxWidth="xs" >
+            <Container component="main" maxWidth="xs" style={{display:"flex",
+                    backgroundColor:"transparent",
+                    width:"450px", 
+                    height:"400px", 
+                    justifySelf:"center",
+                    marginTop:10,
+                    justifyContent:"center", 
+                    alignItems:"center",
+                    border:"2px solid",
+                    borderRadius:"20px"}}>
                 <CssBaseline />
                 <Box
                     sx={{
@@ -130,32 +161,52 @@ export default function SignUp() {
                                     />
                                 </Grid>
                             </Grid>
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color='secondary' />}
-                                label="Remember me"
-                            />
+                            <div style={{
+                                    display:"flex",
+                                    justifyContent:"space-between",
+                                    alignItems:"center",
+                                }}>
+                                    <FormControlLabel
+                                        control={<Checkbox value="remember" color="secondary" />}
+                                        label="Remember me"
+                                    />
+                                    {/* <Link href="#" variant="body2">
+                                        Forgot password?
+                                    </Link> */}
+                                </div>
                         </div>
                         <button
+                            style={{
+                                marginLeft:'25%',
+                                width:'50%',
+                                height:'50px',
+                                cursor:'pointer',
+                                borderRadius:'20px',
+                                backgroundColor: isHovered ? 'rgb(87, 141, 255,0.7)' : 'rgb(87, 141, 255,0.5)',
+                            }}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
                             type="submit"
                             className="custom-btn btn-7 form_submit_button">
                             <span>
                                 SIGN UP
                             </span>
                         </button>
-                        <GoogleLogin
+                        
+                        <Grid container style={{display:'flex', width:'100%',justifyContent:'space-between', alignItems:'center', marginTop:'10px'}}>
+                            {/* <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Grid> */}
+                            <GoogleLogin
                             onSuccess={googleSubmit}
                             onError={() => {
                                 console.log('Login Failed');
                             }}
-                        />;
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
+                        />
                             <Grid item>
-                                <LinkRouter to='/signin' className="liks_router links_forms"> Already have an account? Sign In </LinkRouter>
+                                <LinkRouter to='/signin' className="liks_router links_forms"> Or Sign In </LinkRouter>
                             </Grid>
                         </Grid>
                     </Box>

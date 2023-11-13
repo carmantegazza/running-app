@@ -44,7 +44,7 @@ export default function StickyFooter() {
           <Grid item xs={12} sm={4}>
             <Box
               component="img"
-              sx={{ display:{xs: 'none', md: 'flex'}, height: 80 }}
+              sx={{ display:{md: 'flex'}, height: 80 }}
               alt="Logo"
               src={logo}
               paddingRight='1rem'>
