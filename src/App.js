@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RoutesPage from "./components/RoutesPage/RoutesPage";
 import RouteDetails from "./components/RouteDetails/RouteDetails";
 import EventDetails from "./components/EventDetails/EventDetails";
-import Stickyfooter from "./components/sticky-footer/sticky-footer";
+import Stickyfooter from "./components/Sticky-footer/Sticky-footer";
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
