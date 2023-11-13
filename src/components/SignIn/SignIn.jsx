@@ -12,10 +12,28 @@ import userActions from '../../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import FormControl from '@mui/material/FormControl';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import IconButton from '@mui/material/IconButton'
 
 export default function SignIn() {
     const dispatch = useDispatch()
     const [isHovered, setIsHovered] = useState(false);
+    const [showPassword,setShowPassword] = useState(false);
+
+    const handleMouseDownPassword = () => {
+        
+        setShowPassword(true)
+        // showPassword ?  
+
+    }
+    const handleMouseUpPassword = () => {
+        setShowPassword(false)
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -101,17 +119,27 @@ export default function SignIn() {
                                     autoFocus
                                     color='secondary'
                                 />
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                    color='secondary'
-                                />
+                                <FormControl sx={{width:'100%'}} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton 
+                                                    aria-label="toggle password visibility"
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    onMouseUp={handleMouseUpPassword}
+                                                    edge="end">
+                                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="password">
+                                    </OutlinedInput>
+                                </FormControl>               
+                                
+
                                 <div style={{
                                     display:"flex",
                                     justifyContent:"space-between",
@@ -135,8 +163,7 @@ export default function SignIn() {
                                     height:'50px',
                                     cursor:'pointer',
                                     borderRadius:'20px',
-                                    backgroundColor:'rgb(87, 141, 255,0.5)',
-                                    backgroundColor: isHovered ? 'rgb(87, 141, 255,1)' : 'rgb(87, 141, 255,0.5)',
+                                    backgroundColor: isHovered ? 'rgb(87, 141, 255,0.7)' : 'rgb(87, 141, 255,0.5)',
                                 }}
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
@@ -163,10 +190,9 @@ export default function SignIn() {
                                 />
                                 <Grid item style={{width:'30%'}}>
                                     <LinkRouter to='/signup' className="liks_router links_forms"> Or Sign Up </LinkRouter>
-    
                                 </Grid>
                             </Grid>
-    
+                            
                         </Box>
                     </Box>
     

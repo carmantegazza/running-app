@@ -17,6 +17,13 @@ export default function SignUp() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [isHovered, setIsHovered] = useState(false);
+    // const [showPassword,setShowPassword] = useState(false);
+
+    // const handleShowPassword = () => {
+    //     setShowPassword(true)
+    //     showPassword ?  
+
+    // }
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -175,8 +182,7 @@ export default function SignUp() {
                                 height:'50px',
                                 cursor:'pointer',
                                 borderRadius:'20px',
-                                backgroundColor:'rgb(87, 141, 255,0.5)',
-                                backgroundColor: isHovered ? 'rgb(87, 141, 255,1)' : 'rgb(87, 141, 255,0.5)',
+                                backgroundColor: isHovered ? 'rgb(87, 141, 255,0.7)' : 'rgb(87, 141, 255,0.5)',
                             }}
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
