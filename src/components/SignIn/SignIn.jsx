@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,9 +14,9 @@ import { useDispatch } from 'react-redux';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
+
 export default function SignIn() {
     const dispatch = useDispatch()
-    
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -26,6 +27,8 @@ export default function SignIn() {
             aplication: "training-app"
         };
         dispatch(userActions.signInUser(userData))
+        
+        
     };
     const googleSubmit = async (event) => {
 
@@ -38,12 +41,13 @@ export default function SignIn() {
             from: "google",
             aplication: "training-app"
         };
-       
             dispatch(userActions.signInUser(userData))
+    
         };
     
         return (
             <div className='form_container'>
+                
                 <div className='complement_container'>
                     <div className='letter_container'>
                         <p>
@@ -51,6 +55,7 @@ export default function SignIn() {
                     </div>
                     <div className='image_container'></div>
                 </div>
+                
                 <Container component="main" maxWidth="xs" >
                     <CssBaseline />
                     <Box

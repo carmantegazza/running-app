@@ -34,6 +34,7 @@ const userActions = {
             if (user.data.success) {
                 localStorage.setItem('token', user.data.response.token);
                 dispatch({ type: 'user', payload: user.data.response.dataUser });
+                dispatch({ type: 'userChange', payload: true });
             }
             
             dispatch({
@@ -48,11 +49,12 @@ const userActions = {
     },
     
      SignOutUser: (closeuser) => {
+        console.log("Se llamo")
+        localStorage.removeItem('token')
         return async (dispatch, getState) => {
-            const user = await axios.post(`${urlBackend}/api/user/auth/signOut`, { closeuser })
-            localStorage.removeItem('token')
+            // const user = await axios.post(`${urlBackend}/api/user/auth/signOut`, { closeuser })
             dispatch({ type: 'user', payload: null });
-            return user
+            // return user
         }
     },
     VerificarToken: (token) => {
