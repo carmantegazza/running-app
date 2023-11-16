@@ -42,7 +42,7 @@ useEffect(() => {
         <Route path="/about" element={<About />} />
         <Route path="/routes" element={<RoutesPage />}></Route>
         <Route path="/routes/:id" element={<RouteDetails />}></Route>
-        <Route path="/events/:id" element={<EventDetails />}></Route>
+        <Route path="/event/:id" element={<EventDetails />}></Route>
         {!user && <Route path="/signin" element={<SignIn />} />}
         {!user && <Route path="/signup" element={<SignUp />} />}
       </Routes>

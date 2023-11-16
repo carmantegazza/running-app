@@ -16,8 +16,6 @@ const EventDetails = () => {
   }, [id])
   console.log(eventData)
 
-
-
   const paperStyle = {
     padding: '20px',
     backgroundColor: 'rgba(63, 101, 154)',
@@ -25,14 +23,6 @@ const EventDetails = () => {
     boxShadow: '0 3px 3px rgb(103, 103, 103)',
     display: 'flex',
     flexDirection: 'column'
-  };
-
-  const containerStyle = {
-    padding: '20px',
-    backgroundColor: 'lightblue',
-    borderRadius: '30px',
-    boxShadow: '0 3px 3px rgb(103, 103, 103)',
-
   };
 
   return (
@@ -48,7 +38,7 @@ const EventDetails = () => {
           height: '250px',
           width: '250px',
           borderRadius: '30px',
-          boxShadow: '0 3px 3px rgb(103, 103, 103)'
+          boxShadow: '0 4px 4px rgb(103, 103, 103)'
 
         }}>
         </div>
