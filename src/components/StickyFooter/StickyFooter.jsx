@@ -12,6 +12,7 @@ import { FiYoutube } from '@react-icons/all-files/fi/FiYoutube';
 import logo from '../../media/logo.png'
 import '../../index.css';
 
+// Comentario de prueba
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
