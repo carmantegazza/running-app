@@ -9,7 +9,7 @@ import NavBarNav from '../NavBarNav/NavBarNav';
 const NavBar = () => {
 
 return (
-  <AppBar position='sticky' sx={{ backgroundColor: 'white' }}>
+  <AppBar position='sticky' sx={{ backgroundColor: 'rgba(255,255,255,0.5)', backdropFilter:'blur(5px)' }}>
    <Container maxWidth="xl" >
     <Toolbar disableGutters sx= {{justifyContent: 'space-between'}}>
       <NavBarMenu />

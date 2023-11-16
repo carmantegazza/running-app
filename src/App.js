@@ -1,21 +1,57 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
-import MainCont from "./components/MainCont/MainCont";
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
+import { useSelector, useDispatch } from "react-redux";
+import RoutesPage from "./components/RoutesPage/RoutesPage";
+import RouteDetails from "./components/RouteDetails/RouteDetails";
+import EventDetails from "./components/EventDetails/EventDetails";
+import StickyFooter from "./components/StickyFooter/StickyFooter";
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
+import Snack from './components/Snackbar/Snackbar';
+import { useEffect } from "react";
+import userActions from "./redux/actions/userActions";
 
-function App() {
+export const urlBackend = "http://localhost:4000";
+
+export default function App() {
+const dispatch = useDispatch();
+
+const user = useSelector((store) => store.userReducer.user);
+const userToken = localStorage.getItem('token') 
+
+useEffect(() => {
+  if(userToken !== null){
+    dispatch(userActions.VerificarToken(userToken)) 
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  
   return (
-    <BrowserRouter>
-        <NavBar />
+    <div className="App">
+      <Snack />
+      <NavBar />
+      {/* <div style={{
+        height:'200vh',
+        display:'flex',
+        justifyContent:'center'
+      }}> */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-        <Footer />
-    </BrowserRouter>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/routes" element={<RoutesPage />}></Route>
+        <Route path="/routes/:id" element={<RouteDetails />}></Route>
+        <Route path="/events/:id" element={<EventDetails />}></Route>
+        {!user && <Route path="/signin" element={<SignIn />} />}
+        {!user && <Route path="/signup" element={<SignUp />} />}
+      </Routes>
+      {/* </div> */}
+      
+      <StickyFooter style={{
+        position:'absolute',
+        bottom:'0'
+      }}/>
+    </div>
   );
 }
-
-export default App;
