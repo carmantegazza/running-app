@@ -23,13 +23,38 @@ const userActions = {
             });
         }
     },
+
+    preSignIn:(params)=>{
+        return async(dispatch,getState) => {
+            try{
+                const user = await axios.get(`${urlBackend}/api/users/auth/presignin`, { params })
+               if (!user.data.success){
+                   dispatch({
+                        type: 'message',
+                        payload: {
+                            view: true,
+                            message: 'Your email has not been registered yet. Please, sign up before logging in',
+                            success: user.data.success
+                        }
+                    });
+                    return false
+                }else{
+                    return true
+                }
+                
+            }catch{
+
+            }
+            
+      
+        }
+    },
+
     signInUser: (userData) => {
         
         return async (dispatch, getState) => {
-            console.log(userData)
+
             const user = await axios.post(`${urlBackend}/api/users/auth/signin`, { userData })
-           
-            console.log(user.data.success)
             if (user.data.success) {
                 localStorage.setItem('token', user.data.response.token);
                 dispatch({ type: 'user', payload: user.data.response.dataUser });

@@ -23,14 +23,19 @@ const LoginCont = () => {
     <Grid container justifyContent='flex-end'>
       { !user ? 
       <ButtonGroup variant="contained" aria-label="button group">
-        <Link to="/signin">
+        <Link to="/login">
+          <Button variant='outlined' startIcon={<HiUser fontSize={35} color="#004aad" />}>
+            Log In
+          </Button>
+        </Link>
+        {/* <Link to="/signin">
           <Button variant='outlined' startIcon={<HiUser fontSize={35} color="#004aad" />}>
             Sign In
           </Button>
         </Link>
         <Link to="/signup">
           <Button>Sign Up</Button>
-        </Link>
+        </Link> */}
       </ButtonGroup> : 
       <ButtonGroup variant="contained" aria-label="button group">
         

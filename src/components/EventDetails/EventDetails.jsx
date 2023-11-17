@@ -9,8 +9,11 @@ const EventDetails = () => {
   const { id } = useParams(); // Obtiene el parámetro 'id' de la URL
 
   useEffect(() => {
+    console.log(id)
     getEvent(id).then((res) => {
+      console.log(res)
       setEventData(res); // Update the state with the response data
+      
     });
 
   }, [id])

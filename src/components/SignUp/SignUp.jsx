@@ -84,7 +84,7 @@ export default function SignUp() {
             <Container component="main" maxWidth="xs" style={{display:"flex",
                     backgroundColor:"transparent",
                     width:"450px", 
-                    height:"400px", 
+                    height:"auto", 
                     justifySelf:"center",
                     marginTop:10,
                     justifyContent:"center", 
@@ -98,6 +98,7 @@ export default function SignUp() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        paddingY:3
                     }}
                 >
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -206,7 +207,7 @@ export default function SignUp() {
                             }}
                         />
                             <Grid item>
-                                <LinkRouter to='/signin' className="liks_router links_forms"> Or Sign In </LinkRouter>
+                                <LinkRouter to='/login' className="liks_router links_forms"> Sign In </LinkRouter>
                             </Grid>
                         </Grid>
                     </Box>

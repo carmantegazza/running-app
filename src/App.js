@@ -7,6 +7,7 @@ import RoutesPage from "./components/RoutesPage/RoutesPage";
 import RouteDetails from "./components/RouteDetails/RouteDetails";
 import EventDetails from "./components/EventDetails/EventDetails";
 import StickyFooter from "./components/StickyFooter/StickyFooter";
+import LogIn from './components/LogIn/LogIn'
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
@@ -32,19 +33,15 @@ useEffect(() => {
     <div className="App">
       <Snack />
       <NavBar />
-      {/* <div style={{
-        height:'200vh',
-        display:'flex',
-        justifyContent:'center'
-      }}> */}
-        <Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/routes" element={<RoutesPage />}></Route>
         <Route path="/routes/:id" element={<RouteDetails />}></Route>
         <Route path="/event/:id" element={<EventDetails />}></Route>
+        {!user && <Route path="/login" element={<LogIn></LogIn>}></Route>}
         {!user && <Route path="/signin" element={<SignIn />} />}
-        {!user && <Route path="/signup" element={<SignUp />} />}
+        {!user && <Route path="/signup" element={<SignUp />} />} 
       </Routes>
       {/* </div> */}
       
