@@ -16,18 +16,18 @@ import userActions from "./redux/actions/userActions";
 export const urlBackend = "http://localhost:4000";
 
 export default function App() {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-const user = useSelector((store) => store.userReducer.user);
-const userToken = localStorage.getItem('token') 
+  const user = useSelector((store) => store.userReducer.user);
+  const userToken = localStorage.getItem('token')
 
-useEffect(() => {
-  if(userToken !== null){
-    dispatch(userActions.VerificarToken(userToken)) 
+  useEffect(() => {
+    if (userToken !== null) {
+      dispatch(userActions.VerificarToken(userToken))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-  
+  }, [])
+
   return (
     <div className="App">
       <Snack />
@@ -37,8 +37,9 @@ useEffect(() => {
         display:'flex',
         justifyContent:'center'
       }}> */}
-        <Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/" element={<EventDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/routes" element={<RoutesPage />}></Route>
         <Route path="/routes/:id" element={<RouteDetails />}></Route>
@@ -47,11 +48,11 @@ useEffect(() => {
         {!user && <Route path="/signup" element={<SignUp />} />}
       </Routes>
       {/* </div> */}
-      
+
       <StickyFooter style={{
-        position:'absolute',
-        bottom:'0'
-      }}/>
+        position: 'absolute',
+        bottom: '0'
+      }} />
     </div>
   );
 }
