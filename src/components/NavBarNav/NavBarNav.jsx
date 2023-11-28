@@ -5,7 +5,7 @@ import { Box, Button } from '@mui/material'
 
 const NavBarNav = () => {
 
-    const pages = ['Routes', 'Athletes', 'News'];
+    const pages = ['Routes', 'Events', 'Athletes'];
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
