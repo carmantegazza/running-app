@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RoutesPage from "./components/RoutesPage/RoutesPage";
 import RouteDetails from "./components/RouteDetails/RouteDetails";
 import EventDetails from "./components/EventDetails/EventDetails";
+import EventsPage from "./components/EventsPage/EventsPage";
 import StickyFooter from "./components/StickyFooter/StickyFooter";
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/routes" element={<RoutesPage />}></Route>
         <Route path="/routes/:id" element={<RouteDetails />}></Route>
         <Route path="/event/:id" element={<EventDetails />}></Route>
+        <Route path="/events" element={<EventsPage />}></Route>
         {!user && <Route path="/signin" element={<SignIn />} />}
         {!user && <Route path="/signup" element={<SignUp />} />}
       </Routes>
