@@ -27,7 +27,7 @@ return (
       }}>
         <div
           style={{
-            height: '97.6%',
+            height: '99%',
             overflow: 'auto',
             padding: '10px',
             marginY:'10px',

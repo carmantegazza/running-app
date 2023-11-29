@@ -10,8 +10,11 @@ const EventDetails = () => {
   const { id } = useParams(); 
 
   useEffect(() => {
+    console.log(id)
     getEvent(id).then((res) => {
+      console.log(res)
       setEventData(res); 
+      
     });
     console.log(eventData)
 

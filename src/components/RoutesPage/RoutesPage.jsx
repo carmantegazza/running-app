@@ -53,11 +53,13 @@ const RoutesPage = () => {
 
   return (
     <Box style={{
-      height:'70vh'
+      display:'flex',
+      height:'100vh'
     }}>
-      <Grid container display="flex" px='1.5vw' justifyContent='center' alignItems='space-evenly' gap="20px" paddingTop="10px" >
+      <Grid container xs={12} md={6} lg={8} style={{}} gap="20px" paddingTop="10px" >
        
-        <Grid item xs={12} md={6} display='flex' justifyContent='center'>
+        <Grid item  sx={{display:'flex', flexDirection:"column", justifyContent:'end'}}>
+          
           <FormControl sx={{ minWidth: 300 }}>
           <InputLabel id="location-select-label">Location</InputLabel>
             <Select 
@@ -69,8 +71,11 @@ const RoutesPage = () => {
               {locations.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
             </Select>
           </FormControl>
+        
         </Grid>
-        <Grid item xs={12} md={6} display='flex' justifyContent='center'>
+        
+        <Grid item display='flex' justifyContent='center'>
+          
           <FormControl >
             <InputLabel>Search</InputLabel>
             <OutlinedInput
@@ -79,15 +84,15 @@ const RoutesPage = () => {
                 <IconButton onClick={handleClickClear}>
                   <MdClear color='#004aad'/>
                 </IconButton>
-                
-              
-
             }> </OutlinedInput>
           </FormControl>
-          <Button variant="contained" onClick={handleClick} sx={{height: '100%'}}>Search</Button>
+          
+          <Button variant="contained" onClick={handleClick} sx={{height:60}}>Search</Button>
+        
         </Grid>
+      
       </Grid> 
-      {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} />: <div style={{width:'100%', display:'flex', textAlign:'center', justifyContent:'center'}} > No results found</div>}
+      {routesToRender.length > 0 ? <RoutesContainer xs={12} md={6} lg={4} routes={routesToRender} style={{height:'100%'}}/>: <div style={{width:'100%', display:'flex', textAlign:'center', justifyContent:'center',height:'100%'}} > No results found</div>}      
     </Box>
   )
 }
