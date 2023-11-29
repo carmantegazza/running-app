@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { getEvent } from '../../service/eventService'
-import { Typography, Grid, Paper, Button, Box, CardContent } from '@mui/material'
+import { Typography, Grid, Button, Box, CardContent } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 const EventDetails = () => {
@@ -42,7 +42,7 @@ const EventDetails = () => {
           )}
         </Box>
         <Grid container spacing={2} sx={{ justifyContent: 'center', display: 'flex' }}>
-          <Grid item xs={3} sx={{ justifyContent: 'center', display: 'flex' }}>
+          <Grid item xs={4} sx={{ justifyContent: 'center', display: 'flex' }}>
             {/* Left side: Titles */}
             {eventData && (
               <>
@@ -62,7 +62,7 @@ const EventDetails = () => {
           </Grid>
           {eventData && (
             <>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <Typography component="div" style={{ textAlign: 'left', color: '#004aad' }}>
                   <p style={{ ...borderBottomStyle }}>Organizer</p>
                   <p style={{ ...borderBottomStyle }}>Price</p>
@@ -97,58 +97,8 @@ const EventDetails = () => {
 
         </Grid>
 
-
-
       </Grid>
     </CardContent>
-
-
-    // <Grid container
-    //   sx={{ gap: '20px', padding: '10px', justifyContent: 'center', boxSizing: 'border-box', display: 'flex', alignItems: 'center', height: '67vh' }} >
-
-
-
-
-    //   <Grid >
-    //     <div style={{
-    //       backgroundImage: eventData ? `url(${eventData.organizer_img})` : 'none',
-    //       backgroundSize: 'cover',
-    //       backgroundPosition: 'center',
-    //       backgroundRepeat: 'no-repeat',
-    //       height: '250px',
-    //       width: '250px',
-    //       borderRadius: '30px',
-    //       boxShadow: '0 4px 4px rgb(103, 103, 103)'
-
-    //     }}>
-    //     </div>
-    //   </Grid>
-
-    //   <div style={{ display: 'flex', flexDirection: 'column' }}>
-    //     {/* Card a la derecha */}
-    //     <Grid item sx={{ width: 500, height: '100%' }}>
-
-    //       <Paper style={paperStyle}>
-    //         {eventData && (
-    //           <>
-    //             <Typography color='white' variant="h5">Event Name: {eventData.name}</Typography>
-    //             <Typography color='white' variant="h5">Organizer: {eventData.organizer}</Typography>
-    //           </>
-    //         )}
-    //       </Paper>
-    //     </Grid>
-    //   </div>
-
-    //   {eventData &&  (
-
-    //     <Link to={`/routes/${eventData.route}`}>
-    //       <Button variant="contained" size="large">
-    //         Back
-    //       </Button>
-    //     </Link>
-    //   )}
-
-    // </Grid>
 
   )
 }
