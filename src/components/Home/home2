@@ -14,7 +14,7 @@ const Home = () => {
         <Grid item xs={12}
             height= '100vh'
             className='shadow'
-            style={{backgroundImage: `url(${bgDark})`, backgroundSize: 'cover', backgroundPosition: '50% 50%'}}>
+            style={{backgroundImage: `url(${bgDark})`, backgroundSize: 'cover', backgroundPosition: '70%'}}>
           <Grid item xs={11} md={5}
             padding='2rem'
             color='white'

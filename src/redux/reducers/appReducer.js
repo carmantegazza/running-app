@@ -3,7 +3,9 @@ const initialState = {
     snackbar: {
         view: false,
         message: '',
-        success: true
+        success: true,
+        allowsInteraction:false,
+        interactionOptions:{}
     },
 }
 
@@ -19,8 +21,7 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 snackbar: action.payload,
-            }
-
+            }   
         default:
             return state
     }

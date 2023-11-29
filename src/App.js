@@ -45,10 +45,7 @@ useEffect(() => {
       </Routes>
       {/* </div> */}
       
-      <StickyFooter style={{
-        position:'absolute',
-        bottom:'0'
-      }}/>
+      <StickyFooter/>
     </div>
   );
 }

@@ -16,14 +16,14 @@ const NavBarNav = () => {
     const handleCloseNavMenu = () => {
       setAnchorElNav(null);
     };
-
+//004aad
   return (
-    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1rem'}}>
+    <Box sx={{ width:'100%',flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem'}}>
             {pages.map((page) => (
                     <Link to={page} key={page} style={{textDecoration: 'none'}}>
                       <Button
                           onClick={handleCloseNavMenu}
-                          sx={{ fontSize: '20px', my: 2, color: '#004aad', display: 'block', textDecoration: 'none' }}>
+                          sx={{ fontSize: '20px', my: 2, color: 'black', display: 'block', textDecoration: 'none' }}>
                           {page}
                       </Button>
                     </Link>
