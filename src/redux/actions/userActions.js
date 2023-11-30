@@ -140,7 +140,31 @@ const userActions = {
     //         }
     //     }
     },
-
+    deleteDocument:(userData,typeOfDelete)=>{
+        return async (dispatch,getState)=>{
+            try{
+                const res = await axios.delete(`${urlBackend}/api/users/auth/deletedocument`, { data: userData })
+                switch(typeOfDelete){
+                    case 'changeEmailOnSignup':
+                        dispatch({
+                            type:'message',
+                            payload:{
+                                view:true,
+                                message:'Now you can change your email and send the form again',
+                                success:res.data.success
+                            }
+                        })
+                        return true
+                    case 'deleteUser':
+                        return true
+                }
+                
+                return true
+            }catch(err){
+                console.log(err.message)
+            }
+        }
+    },
     signInUser: (userData) => {
 
         return async (dispatch, getState) => {
