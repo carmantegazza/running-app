@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useForm} from 'react-hook-form';
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,7 +9,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { Modal, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, DialogSlide } from "@mui/material"
-import { Link as LinkRouter, useNavigate } from "react-router-dom";
+import { Link as LinkRouter, useNavigate, useRouteLoaderData } from "react-router-dom";
 import userActions from "../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
@@ -20,6 +21,8 @@ const SignUp = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [actualData, setActualData] = useState({})
+    const [passwordsMatch,setPasswordsMatch] = useState(true)
+    const {register, getValues} = useForm()
 
     const hovers = {
 
@@ -45,7 +48,6 @@ const SignUp = () => {
         onResendEmail: async () => {
             await dispatch(userActions.onVerifyFail.SendEmail(actualData))
             .then(res=>{
-                console.log('this is response in onResendEmail' , res)
                 navigate('/login')
             })
         },
@@ -54,7 +56,6 @@ const SignUp = () => {
              setOpenDialog(false)
             await dispatch(userActions.deleteDocument(actualData,'changeEmailOnSignup'))
             .then(res=>{
-                console.log('this is response in onResendEmail' , res)
             })
             
             // await dispatch(userActions.onVerifyFail.changeUserMail(actualData))
@@ -63,6 +64,14 @@ const SignUp = () => {
             // })
         },
         continueWithoutVerify:()=>{
+            dispatch({
+                type: 'message',
+                payload: {
+                    view: true,
+                    message: 'You can access now, but you wont be able to use the hole functionalities until you verify your email.',
+                    success: true
+                }
+            })
             navigate('/login')
         }
     }
@@ -73,21 +82,33 @@ const SignUp = () => {
         const userData = {
             email: data.get('email'),
             password: data.get('password'),
+            confirmPassword:data.get('confirm-password'),
             firstName: data.get('firstName'),
             lastName: data.get('lastName'),
             from: "signUp-form"
         };
-        ;
-        await dispatch(userActions.signUpUser(userData))
-            .then(res => {
-                if (!res.success) {
-                    setActualData(userData)
-                    setOpenDialog(true)
-                }
-                else {
-                    navigate('/login')
+        
+        if(userData.password===userData.confirmPassword){
+            await dispatch(userActions.signUpUser(userData))
+                .then(res => {
+                    if (!res) {
+                        setActualData(userData)
+                        setOpenDialog(true)
+                    }else {
+                        navigate('/login')
+                    }
+                })
+        }else{
+            setPasswordsMatch(false)
+                dispatch({
+                type:'message',
+                payload:{
+                    view:true,
+                    message:'Passwords must match',
+                    success:false
                 }
             })
+        }        
     };
 
 
@@ -107,7 +128,10 @@ const SignUp = () => {
         dispatch(userActions.signUpUser(userData))
         navigate('/signin')
     };
-
+    
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
 
     return (
         <>
@@ -193,6 +217,7 @@ const SignUp = () => {
                                             type="password"
                                             id="password"
                                             color='secondary'
+                                            error={!passwordsMatch}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -205,6 +230,10 @@ const SignUp = () => {
                                             type="password"
                                             id="confirm-password"
                                             color='secondary'
+                                            error={!passwordsMatch}
+                                            // inputProps={{
+                                            //     pattern: `^${escapeRegExp(getValues('password'))}$`, // escapeRegExp is a helper function to escape special characters
+                                            // }}
                                         />
                                     </Grid>
                                 </Grid>
@@ -245,7 +274,7 @@ const SignUp = () => {
                 </Container>
             </div>
             {/* : */}
-            {openDialog && (
+            {/* {openDialog && ( */}
                 <Dialog
                     open={openDialog}
                     onClose={dialogActions.close}
@@ -295,7 +324,7 @@ const SignUp = () => {
                                 </Button> */}
 
                 </Dialog>
-            )}
+            {/* )} */}
             {/* } */}
         </>
     );

@@ -154,11 +154,7 @@ export default function LogIn() {
             }
         }
     }
-    const body = () =>{
-        const response = 'jdsafgn'
-        return response
-    }
-console.log(body())
+
     return (
         <Box sx={{
             display: 'flex',
@@ -262,7 +258,7 @@ console.log(body())
                                         title="Stay Connected!" 
                                         arrow >
                                         <Checkbox 
-                                            style={{padding:'0',visibility: hasAccount ? 'visible' : 'hidden' }} 
+                                            style={{padding:'0'}} 
                                             onClick={handleLoginVariables.rememberCheckbox} 
                                             onMouseEnter={handleHovers.remember.handleMouseEnter} 
                                             onMouseLeave={handleHovers.remember.handleMouseLeave} 
