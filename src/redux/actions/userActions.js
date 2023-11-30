@@ -13,8 +13,8 @@ const userActions = {
         }
         return async (dispatch, getState) => {
             const res = await axios.post(`${urlBackend}/api/users/auth/signup`, { userData })
-
-            if (res.success) {
+            
+            if (res.data.success) {
                 dispatch({
                     type: 'message',
                     payload: {
