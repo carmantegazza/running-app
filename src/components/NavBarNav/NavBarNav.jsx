@@ -7,7 +7,7 @@ const NavBarNav = () => {
     const pages = ['Routes', 'Events', 'News'];
 
   return (
-    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '1rem'}}>
+    <Box sx={{ width:'100%',flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem'}}>
             {pages.map((page) => (
               <Link to={page} key={page} style={{textDecoration: 'none'}}>
                 <Button

@@ -6,15 +6,21 @@ import { Typography, Grid, Button, Box, CardContent } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 const EventDetails = () => {
-  const [eventData, setEventData] = useState(); // Estado para almacenar datos de eventos
-  const { id } = useParams(); // Obtiene el parámetro 'id' de la URL
+  const [eventData, setEventData] = useState();
+  const { id } = useParams(); 
 
   useEffect(() => {
+    console.log(id)
     getEvent(id).then((res) => {
-      setEventData(res); // Update the state with the response data
+      console.log(res)
+      setEventData(res); 
+      
     });
+    console.log(eventData)
 
   }, [id])
+
+
 
   const borderBottomStyle = {
     borderBottom: '1px solid #ccc',
@@ -64,15 +70,17 @@ const EventDetails = () => {
             <>
               <Grid item xs={4}>
                 <Typography component="div" style={{ textAlign: 'left', color: '#004aad' }}>
+                  <p style={{ ...borderBottomStyle }}>Location</p>
                   <p style={{ ...borderBottomStyle }}>Organizer</p>
-                  <p style={{ ...borderBottomStyle }}>Price</p>
+                  <p style={{ ...borderBottomStyle }}>Inscription Fee</p>
                   <p >Description</p>
                 </Typography>
               </Grid>
 
               <Grid item xs={4}>
                 <Typography component="div" style={{ textAlign: 'left' }}>
-                  <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{eventData.organizer || 'pending...'} metres</p>
+                <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{eventData.route.location || 'pending...'} </p>
+                  <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{eventData.organizer || 'pending...'} </p>
                   <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>US${eventData.price || 'pending...'}</p>
                   <p style={{ marginBottom: '8px' }}>{eventData.description || 'pending...'}</p>
                 </Typography>

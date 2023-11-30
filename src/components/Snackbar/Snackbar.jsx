@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Stack from '@mui/material/Stack';
-import { IconButton } from '@mui/material';
+import { IconButton, Button} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert from '@mui/material/Alert';
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +14,7 @@ function Snack() {
     const dispatch = useDispatch()
     const showSnackbar = useSelector(store => store.appReducer.snackbar)
 
+
     const handleClose = () => {
         dispatch({
             type: 'message',
@@ -24,9 +25,9 @@ function Snack() {
             }
         });
     };
-
+    
     return (
-        <Stack spacing={2} sx={{ width: '100%' }}>
+        <Stack spacing={2} sx={{ width: '100%' }}> 
             {showSnackbar.view === true && (
                 <Snackbar
                     anchorOrigin={{
@@ -35,9 +36,9 @@ function Snack() {
                     }}
                     open={showSnackbar.view}
                     onClose={handleClose}
-                    autoHideDuration={7000}
+                    autoHideDuration={3000}
                     className='snackbar'
-                >
+                > 
                     <Alert
                         severity={showSnackbar.success ? 'success' : 'error'}
                         action={
@@ -65,8 +66,7 @@ function Snack() {
                     </Alert>
                 </Snackbar>
             )}
-
-        </Stack>
+        </Stack>        
     );
 }
 
