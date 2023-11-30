@@ -43,7 +43,6 @@ const SignUp = () => {
             setOpenDialog(false)
         },
         onResendEmail: async () => {
-            console.log(actualData)
             await dispatch(userActions.onVerifyFail.SendEmail(actualData))
             .then(res=>{
                 console.log('this is response in onResendEmail' , res)
@@ -51,9 +50,12 @@ const SignUp = () => {
             })
         },
         
-        onChangeEmail: async (actualData) => {
-            setOpenDialog(false)
-            
+        onChangeEmail: async () => {
+             setOpenDialog(false)
+            await dispatch(userActions.deleteDocument(actualData,'changeEmailOnSignup'))
+            .then(res=>{
+                console.log('this is response in onResendEmail' , res)
+            })
             
             // await dispatch(userActions.onVerifyFail.changeUserMail(actualData))
             // .then(res=>{
@@ -258,13 +260,13 @@ const SignUp = () => {
                 //          <CloseIcon fontSize="inherit" />
                 //  </IconButton>}
                 >
-                    <DialogTitle id="alert-dialog-title">
-                        {"Problem with email"}
+                    <DialogTitle id="alert-dialog-title" sx={{textAlign:'center'}}>
+                        {"Select an option to continue"}
                     </DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
+                        {/* <DialogContentText id="alert-dialog-description">
                             It seems to be an errror while sending the validation email, please select an option to continue
-                        </DialogContentText>
+                        </DialogContentText> */}
                     </DialogContent>
                     <DialogActions>
                         <Button color="inherit" size="small" onClick={dialogActions.onResendEmail}>
