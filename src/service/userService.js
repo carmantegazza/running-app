@@ -10,3 +10,13 @@ export const addFavEvent = async ( eventId, userId, user ) => {
       return []; 
     }
   };
+
+  export const getUser = async ( userId ) => {
+    try {
+       const res = await axios.get(`http://localhost:4000/api/user/${userId}`)
+      console.log(res.data)
+      return res.data
+    } catch (error) {
+         return []
+    }
+  }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { getEvents, updateEvent } from '../../service/eventService';
-import { addFavEvent } from '../../service/userService'
+import { addFavEvent, getUser } from '../../service/userService'
 import { useState, useEffect } from 'react';
 import { ButtonGroup, Stack, Divider, Card, CardHeader, CardContent, Typography, Avatar, Box, IconButton} from '@mui/material';
 import { FaRegCalendarPlus } from '@react-icons/all-files/fa/FaRegCalendarPlus.esm'
@@ -15,18 +15,28 @@ const EventsPage = () => {
     
     const user = useSelector((store) => store.userReducer.user);
     const [allEvents, setAllEvents] = useState();
-    const [hasJoined, setHasJoined] = useState(false)
+    const [userData, setUserData] = useState();
+    const [hasJoined, setHasJoined] = useState(false);
 
     useEffect(() => {
         getEvents().then((res) => {
           setAllEvents(res); 
         });
     
-      }, [])    
+      }, [])  
+
+      useEffect(() => {
+        getUser().then((res) => {
+          setUserData(res); 
+        });
+    
+      }, [])  
+      
+    console.log(userData)  
 
     return (
         <Stack
-        marginTop={5}
+        marginTop={10}
         paddingX={10}
         direction="column"
         divider={<Divider orientation="horizontal" flexItem />}
@@ -56,7 +66,7 @@ const EventsPage = () => {
                       </IconButton>:
                       <IconButton disabled> <TiTick/> </IconButton>                        
                       }
-                      {!user.favEvents ? 
+                      {!userData.favEvents ? 
                       <IconButton onClick={() => addFavEvent( event._id, user.id, user )}> <FaRegHeart /> </IconButton>:
                       <IconButton> <FaHeart color='#C41E3D'/> </IconButton>
                       }
