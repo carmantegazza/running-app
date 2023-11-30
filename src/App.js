@@ -34,11 +34,6 @@ export default function App() {
     <div className="App">
       <Snack />
       <NavBar />
-      {/* <div style={{
-        height:'200vh',
-        display:'flex',
-        justifyContent:'center'
-      }}> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/" element={<EventDetails />} />
@@ -51,8 +46,6 @@ export default function App() {
         {!user && <Route path="/signin" element={<SignIn />} />}
         {!user && <Route path="/signup" element={<SignUp />} />} 
       </Routes>
-      {/* </div> */}
-
       <StickyFooter style={{
         position: 'absolute',
         bottom: '0'
