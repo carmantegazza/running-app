@@ -37,6 +37,7 @@ export const updateEvent = async (eventId, userId, user) => {
     return res.data; 
   } catch (error) {
     console.error('Error en la solicitud PUT:', error);
+    console.log(userId)
     return []; 
   }
 };

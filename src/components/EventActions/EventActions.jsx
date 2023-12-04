@@ -25,25 +25,21 @@ const EventActions = ({eventData, userData}) => {
       console.error('Error updating event:', error);
 
     }
-
   };
 
   const handleUpdateFavEvent = async (eventId) => {
     try {
-      await updateFavEvent(eventId, user._id , eventInfo);
-      
+      await updateFavEvent(eventId, user._id , eventInfo);  
       const updateduser = await getUser(user._id);
-  
       setUser(user => ({ ...user, ...updateduser }));
     } catch (error) {
       console.error('Error updating fav event:', error);
     }
   };
 
-
   return (
     <>
-    { !user ?
+    { !userData ?
       <Typography variant='overline' textAlign='center' color='#004aad'>Log in to join the event!
       </Typography> :
       <ButtonGroup>
@@ -51,7 +47,7 @@ const EventActions = ({eventData, userData}) => {
         <IconButton onClick={() => handleUpdateEvent(eventInfo._id, user._id)} title='Join the event!'> 
           <FaRegCalendarPlus /> 
         </IconButton>:
-        <IconButton disabled> <TiTick /> </IconButton>                        
+        <IconButton size='medium' disabled> <TiTick /> </IconButton>                        
         }
         <IconButton onClick={() => handleUpdateFavEvent(eventInfo._id)}>
           {user.favEvents ?

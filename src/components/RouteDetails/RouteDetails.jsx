@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { getRoutes } from '../../service/routeService'
-import { Typography, Card, CardContent, Grid, Box, Paper, Button } from '@mui/material'
+import { Typography, CardContent, Grid, Box, Button } from '@mui/material'
 import { getEventsFromOneRoute } from '../../service/eventService'
 import { Link } from 'react-router-dom'
 
@@ -22,7 +22,6 @@ const RouteDetails = () => {
         const data = await getEventsFromOneRoute(routeId);
         setEventData(data); // Actualizamos el estado con los datos de eventos
 
-        console.log(data)
       } catch (error) {
         console.error('Error al obtener los datos de eventos:', error);
       }

@@ -24,7 +24,7 @@ const RouteElement = ({infoRoute}) => {
     const handleUnhover = () => {
       setIsHovered(false);
     };
-   console.log(infoRoute)
+
     return (
             <Grid
                 item

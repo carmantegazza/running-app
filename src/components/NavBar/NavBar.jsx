@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { AppBar, Container, Toolbar, Box } from '@mui/material';
+import { AppBar, Container, Toolbar } from '@mui/material';
 import LoginCont from '../LoginCont/LoginCont';
 import NavBarMenu from '../NavBarMenu/NavBarMenu';
 import NavBarLogo from '../NavBarLogo/NavBarLogo';

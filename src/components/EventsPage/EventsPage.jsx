@@ -18,7 +18,7 @@ const EventsPage = () => {
       setUserData(res); 
     });
   
-  }, [user])  
+  }, [])  
 
     useEffect(() => {
         getEvents().then((res) => {
@@ -28,8 +28,9 @@ const EventsPage = () => {
       }, [])  
 
      return (
+      <>
+      <Typography variant='h3'> All the events </Typography>
         <Stack
-        marginTop={10}
         paddingX={10}
         direction="column"
         divider={<Divider orientation="horizontal" flexItem />}
@@ -57,6 +58,7 @@ const EventsPage = () => {
         })}
 
       </Stack>
+      </>
   )
 }
 
