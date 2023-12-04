@@ -3,7 +3,8 @@ import RoutesContainer from '../RoutesContainer/RoutesContainer'
 import { getRoutes } from '../../service/routeService'
 import { Box, Select, MenuItem, Button, FormControl, InputLabel, Grid, OutlinedInput, IconButton } from '@mui/material'
 import { MdClear } from '@react-icons/all-files/md/MdClear'
-
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
 const RoutesPage = () => {
 
@@ -13,7 +14,9 @@ const RoutesPage = () => {
   const [routesToRender, setRoutesToRender] = useState([])
   const inputSearch = useRef(null)
   const [locationFiltered, setLocationFiltered] = useState('')
-   
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  console.log(isSmallScreen)
   useEffect(() => {
      getRoutes().then((res) => {
        setLocations([...new Set(res.map((route) => route.location))])
@@ -54,11 +57,15 @@ const RoutesPage = () => {
   return (
     <Box style={{
       display:'flex',
-      height:'100vh'
-    }}>
-      <Grid container xs={12} md={6} lg={8} style={{}} gap="20px" paddingTop="10px" >
+      flexDirection: isSmallScreen ? 'column' : 'row',
+      marginTop:'80px',
+      height:'68vh',
+      width:'100%',
+      border:'2px solid black'
+    }}> 
+      <Grid container sx={{display:'flex', flexDirection:"column",width:'100%'}} gap="20px" padding="10px">
        
-        <Grid item  sx={{display:'flex', flexDirection:"column", justifyContent:'end'}}>
+        <Grid item  sx={{width:'100px'}}>
           
           <FormControl sx={{ minWidth: 300 }}>
           <InputLabel id="location-select-label">Location</InputLabel>
@@ -74,7 +81,7 @@ const RoutesPage = () => {
         
         </Grid>
         
-        <Grid item display='flex' justifyContent='center'>
+        <Grid item display='flex'>
           
           <FormControl >
             <InputLabel>Search</InputLabel>
@@ -88,11 +95,13 @@ const RoutesPage = () => {
           </FormControl>
           
           <Button variant="contained" onClick={handleClick} sx={{height:60}}>Search</Button>
-        
+          
         </Grid>
-      
+        <Grid item style={{height:'100%'}}>
+        {routesToRender.length > 0 ? <RoutesContainer routes={routesToRender} style={{height:'100%'}} />: <div style={{display:'flex', textAlign:'center', justifyContent:'center',height:'100%'}} > No results found</div>}      
+        </Grid>
+
       </Grid> 
-      {routesToRender.length > 0 ? <RoutesContainer xs={12} md={6} lg={4} routes={routesToRender} style={{height:'100%'}}/>: <div style={{width:'100%', display:'flex', textAlign:'center', justifyContent:'center',height:'100%'}} > No results found</div>}      
     </Box>
   )
 }

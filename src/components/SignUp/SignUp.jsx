@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import { useForm } from 'react-hook-form';
+//import {useForm} from 'react-hook-form';
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Modal, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, DialogSlide } from "@mui/material"
-import { Link as LinkRouter, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material"
+import { Link as LinkRouter, useNavigate} from "react-router-dom";
 import userActions from "../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+//import { GoogleLogin } from "@react-oauth/google";
+//import { jwtDecode } from "jwt-decode";
 
 const SignUp = () => {
     const dispatch = useDispatch()
@@ -22,7 +19,7 @@ const SignUp = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [actualData, setActualData] = useState({})
     const [passwordsMatch,setPasswordsMatch] = useState(true)
-    const {register, getValues} = useForm()
+    //const {register, getValues} = useForm()
 
     const hovers = {
 
@@ -112,30 +109,25 @@ const SignUp = () => {
     };
 
 
-    const googleSubmit = async (event) => {
+    // const googleSubmit = async (event) => {
 
-        const token = event.credential;
-        const decoded = await jwtDecode(token);
-        console.log(decoded)
-        const userData = {
-            email: decoded.email,
-            password: decoded.family_name + "AMD23google",
-            firstName: decoded.given_name,
-            lastName: decoded.family_name,
-            from: "google"
-        };
+    //     const token = event.credential;
+    //     const decoded = await jwtDecode(token);
+    //     console.log(decoded)
+    //     const userData = {
+    //         email: decoded.email,
+    //         password: decoded.family_name + "AMD23google",
+    //         firstName: decoded.given_name,
+    //         lastName: decoded.family_name,
+    //         from: "google"
+    //     };
 
-        dispatch(userActions.signUpUser(userData))
-        navigate('/signin')
-    };
-    
-    function escapeRegExp(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
+    //     dispatch(userActions.signUpUser(userData))
+    //     navigate('/signin')
+    // };
 
     return (
         <>
-            {/* {!openDialog? */}
             <div className='form_container'
                 style={{
                     display: 'flex',
@@ -231,9 +223,6 @@ const SignUp = () => {
                                             id="confirm-password"
                                             color='secondary'
                                             error={!passwordsMatch}
-                                            // inputProps={{
-                                            //     pattern: `^${escapeRegExp(getValues('password'))}$`, // escapeRegExp is a helper function to escape special characters
-                                            // }}
                                         />
                                     </Grid>
                                 </Grid>
@@ -257,13 +246,6 @@ const SignUp = () => {
                                 </span>
                             </button>
 
-                            {/* <Grid container style={{display:'flex', width:'100%',justifyContent:'space-between', alignItems:'center', marginTop:'10px'}}>
-                            <GoogleLogin
-                            onSuccess={googleSubmit}
-                            onError={() => {
-                                console.log('Login Failed');
-                            }}
-                        /> */}
                             <div style={{ display: 'flex', justifyContent: 'end' }}>
                                 <LinkRouter to='/login' className="liks_router links_forms"> Sign In </LinkRouter>
                             </div>
@@ -273,29 +255,15 @@ const SignUp = () => {
 
                 </Container>
             </div>
-            {/* : */}
-            {/* {openDialog && ( */}
+
                 <Dialog
                     open={openDialog}
                     onClose={dialogActions.close}
-                //  action={
-                //  <IconButton
-                //      aria-label="close"
-                //      color="inherit"
-                //      size="small"
-                //      onClick={() => {
-                //          handleClose(true);
-                //      }}>
-                //          <CloseIcon fontSize="inherit" />
-                //  </IconButton>}
                 >
                     <DialogTitle id="alert-dialog-title" sx={{textAlign:'center'}}>
                         {"Select an option to continue"}
                     </DialogTitle>
                     <DialogContent>
-                        {/* <DialogContentText id="alert-dialog-description">
-                            It seems to be an errror while sending the validation email, please select an option to continue
-                        </DialogContentText> */}
                     </DialogContent>
                     <DialogActions>
                         <Button color="inherit" size="small" onClick={dialogActions.onResendEmail}>
@@ -308,24 +276,7 @@ const SignUp = () => {
                             Continue without verifying
                         </Button>
                     </DialogActions>
-                    {/* {(typeof showSnackbar.message) === "string" ?
-                                    (<>{showSnackbar.message}</>) :
-                                    <ul>
-                                        {showSnackbar.message.map(message =>
-                                            <li>{message.message}</li>
-                                        )}
-                                    </ul>
-                                }
-                                <Button color="inherit" size="small" onClick={userEmailActions.onResendEmail}>
-                                    {showSnackbar.interactionOptions.option1}
-                                </Button>
-                                <Button color="inherit" size="small" onClick={userEmailActions.onChangeEmail}>
-                                    {showSnackbar.interactionOptions.option2}
-                                </Button> */}
-
                 </Dialog>
-            {/* )} */}
-            {/* } */}
         </>
     );
 }
