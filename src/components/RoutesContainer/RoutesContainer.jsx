@@ -5,11 +5,10 @@ import './RoutesContainer.css'
 const RoutesContainer = ({routes}) => {
 
 return (
-    <Box>
+    <Box sx={{width: '100%'}}>
       {/* <Container><Container/> */}
       <Container sx={{ 
-      width: '100vw',
-      height: '84vh',
+      height: '65vh',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

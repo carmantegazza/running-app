@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { getRoutes } from '../../service/routeService'
-import { Typography, Card, CardContent, Grid, Box, Paper, Button } from '@mui/material'
+import { Typography, CardContent, Grid, Box, Button } from '@mui/material'
 import { getEventsFromOneRoute } from '../../service/eventService'
 import { Link } from 'react-router-dom'
 
@@ -90,7 +90,7 @@ const RouteDetails = () => {
                 <Grid item xs={6}>
                   {/* Right side: Information from the database */}
                   <Typography component="div" style={{ textAlign: 'left' }}>
-                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.distance || 'pending...'} miles</p>
+                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.distance || 'pending...'} mi</p>
                     <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.location || 'pending...'}</p>
                     <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.difficulty || 'pending...'}</p>
                     <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.elevation_gain || 'pending...'}</p>
