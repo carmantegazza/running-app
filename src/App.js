@@ -48,10 +48,7 @@ export default function App() {
         {!user && <Route path="/signup" element={<SignUp />} />} 
         <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
-      <StickyFooter style={{
-        position: 'absolute',
-        bottom: '0'
-      }} />
+      <StickyFooter />
     </div>
   );
 }

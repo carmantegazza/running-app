@@ -1,16 +1,5 @@
 import axios from "axios";
 
-export const getEventsFromOneRoute = async (routeId) => {
-   try {
-     const request = await fetch(`http://localhost:4000/api/eventforroute/${routeId}`);
-     const data = await request.json();
-     return data.events;
-   } catch (error) {
-     return [];
-   }
- };
-
-
  export const getEvent = async (eventId) => {
   try {
     const request =  await fetch(`http://localhost:4000/api/event/${eventId}`)
@@ -37,11 +26,9 @@ export const updateEvent = async (eventId, userId, user) => {
     return res.data; 
   } catch (error) {
     console.error('Error en la solicitud PUT:', error);
-    console.log(userId)
     return []; 
   }
 };
-
 
 export const deleteUserByEvent = async (eventId, userId) => {
   try {
