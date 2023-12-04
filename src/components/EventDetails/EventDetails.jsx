@@ -168,8 +168,6 @@ const EventDetails = () => {
 
         </Grid>
       </Grid>
-
-      <Profile></Profile>
     </CardContent>
 
   )

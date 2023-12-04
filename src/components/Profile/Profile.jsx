@@ -33,94 +33,93 @@ const Profile = () => {
             getUser(user.id).then((res) => {
                 setUserData(res);
             });
+            
 
-    }, [])
+    }, [user, userData])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const events = await getEvents();
-                setAllEvents(events);
-            } catch (error) {
-                console.error('Error al obtener eventos:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
+    console.log(userData);
 
     useEffect(() => {
-            const userSubEvents = allEvents.filter((event) => event.usersJoin.includes(user.id));
-            setSubEvents(userSubEvents);
-
-            const userFavEvents = userData.favEvents.map((favEventId) => allEvents.find((event) => event._id === favEventId));
-            setFavEvents(userFavEvents);
-
-    }, [user, allEvents]);
+        if (user) {
+          getUser(user.id).then((res) => {
+            setUserData(res);
+          });
+        }
+      }, [user]);
 
     useEffect(() => {
-        setTempFullName(userData.fullName);
-        setTempEmail(userData.email);
-        // setTempDob(user.dob);
-        setFavEvents(userData.favEvents);
-        console.log("informacion" + userData)
-    }, [user]);
+        if (userData && allEvents.length > 0) {
+          const userSubEvents = allEvents.filter((event) => event.usersJoin.includes(userData._id));
+          setSubEvents(userSubEvents);
+    
+          const userFavEvents = userData.favEvents
+            ? userData.favEvents.map((favEventId) => allEvents.find((event) => event._id === favEventId))
+            : [];
+          setFavEvents(userFavEvents);
+        }
+
+      }, [userData, allEvents]);
+
+    // useEffect(() => {
+    //     setTempFullName(userData.fullName);
+    //     setTempEmail(userData.email);
+    //     console.log("informacion" + userData)
+    // }, []);
 
     const handleEditClick = () => {
         setEditing(true);
     };
 
-    const handleSaveClick = async () => {
+    // const handleSaveClick = async () => {
 
-        try {
-            setEditing(false);
+    //     try {
+    //         setEditing(false);
 
-            setSubEvents((prev) => prev.filter((event) => !subEventsToDelete.includes(event._id)));
-            // setFavEvents((prev) => prev.filter((event) => !favEventsToDelete.includes(event._id)));
+    //         setSubEvents((prev) => prev.filter((event) => !subEventsToDelete.includes(event._id)));
+    //         setFavEvents((prev) => prev.filter((event) => !favEventsToDelete.includes(event._id)));
 
-            setSubEventsToDelete([]);
-            setFavEventsToDelete([]);
+    //         setSubEventsToDelete([]);
+    //         setFavEventsToDelete([]);
 
-            userData.fullName = tempFullName;
-            userData.email = tempEmail;
-            // user.dob = tempDob;
-            userData.favEvents = favEvents;
+    //         userData.fullName = tempFullName;
+    //         userData.email = tempEmail;
+    //         userData.favEvents = favEvents;
 
-            await updateUser(userData.id, user);
-            subEvents.forEach(async (event) => {
-                await deleteUserByEvent(event.id, userData.id);
-            });
+    //         await updateUser(userData.id, user);
+    //         subEvents.forEach(async (event) => {
+    //             await deleteUserByEvent(event.id, userData.id);
+    //         });
 
-        } catch (error) {
-            console.error('Error updating user:', error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error('Error updating user:', error);
+    //     }
+    // };
 
-    const handleCancelClick = () => {
-        setEditing(false);
+    // const handleCancelClick = () => {
+    //     setEditing(false);
 
-        setTempFullName(userData.fullName);
-        setTempEmail(userData.email);
-        // setTempDob(user.dob);
+    //     setTempFullName(userData.fullName);
+    //     setTempEmail(userData.email);
+    //     // setTempDob(user.dob);
 
-        setSubEventsToDelete([]);
-        setFavEventsToDelete([]);
-    };
+    //     setSubEventsToDelete([]);
+    //     setFavEventsToDelete([]);
+    // };
 
-    const handleAvatarClick = () => {
-        // Aquí puedes implementar la lógica para cargar una nueva imagen.
-        // Por ejemplo, abrir un cuadro de diálogo para seleccionar un archivo.
-        // Luego, actualiza el estado con la nueva URL de la imagen.
-        console.log('Cambiar imagen de perfil');
-    };
+    // const handleAvatarClick = () => {
+    //     // Aquí puedes implementar la lógica para cargar una nueva imagen.
+    //     // Por ejemplo, abrir un cuadro de diálogo para seleccionar un archivo.
+    //     // Luego, actualiza el estado con la nueva URL de la imagen.
+    //     console.log('Cambiar imagen de perfil');
+    // };
 
-    const saveEachEventToDelete = (eventId) => {
-        setSubEventsToDelete((prev) => [...prev, eventId]);
-    };
+    // const saveEachEventToDelete = (eventId) => {
+    //     setSubEventsToDelete((prev) => [...prev, eventId]);
+    // };
 
-    const saveEachFavEventToDelete = (eventId) => {
-        setFavEventsToDelete((prev) => [...prev, eventId]);
-    };
+    // const saveEachFavEventToDelete = (eventId) => {
+    //     setFavEventsToDelete((prev) => [...prev, eventId]);
+    // };
 
     const CircularAvatar = styled(Avatar)({
         width: 100,
@@ -145,11 +144,11 @@ const Profile = () => {
         <Grid>
             {userData && (
                 <Paper elevation={3} style={{ padding: '30px', maxWidth: '400px', margin: 'auto' }}>
-                    <CircularAvatar alt="User Avatar" src={user.avatarUrl} onClick={handleAvatarClick}>
+                    {/* <CircularAvatar alt="User Avatar" src={user.avatarUrl} onClick={handleAvatarClick}>
                         <CameraButton onClick={handleAvatarClick}>
                             <PhotoCameraIcon />
                         </CameraButton>
-                    </CircularAvatar>
+                    </CircularAvatar> */}
                     <Typography variant="h5" align="center" padding={"20px"} gutterBottom>
                         {isEditing ? (
                             <TextField
@@ -177,21 +176,7 @@ const Profile = () => {
                         )}
                     </Typography>
 
-                    {/* <Typography variant="body2" color="textSecondary" style={{ fontSize: '1rem', paddingBottom: '10px' }}>
-                        {isEditing ? (
-                            <TextField
-                                value={tempDob}
-                                onChange={(e) => setTempDob(e.target.value)}
-                                fullWidth
-                                variant="standard"
-                            />
-                        ) : (
-                            `Date of Birth: ${user.dob}`
-                        )}
-                    </Typography> */}
-
-
-                    <Box
+                    {/* <Box
                         bgcolor="rgba(63, 101, 154)"
                         color="white"
                         p={1}
@@ -262,7 +247,7 @@ const Profile = () => {
                         <Button variant="outlined" color="primary" onClick={handleEditClick} fullWidth style={{ marginTop: '10px' }}>
                             Edit
                         </Button>
-                    )}
+                    )} */}
                 </Paper>
             )
             }
