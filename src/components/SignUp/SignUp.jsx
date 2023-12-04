@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
