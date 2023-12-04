@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import userActions from '../../redux/actions/userActions';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import Visibility from '@mui/icons-material/Visibility';
 import { VisibilityOff } from '@mui/icons-material';
-import { Divider, IconButton, Tooltip,createTheme, OutlinedInput, InputLabel, InputAdornment, Link, FormControl, Box, Container, Grid, Checkbox, FormControlLabel, TextField, CssBaseline, Button, collapseClasses } from '@mui/material'
+import { Divider, IconButton, Tooltip,InputAdornment, Link, Box, Container, Checkbox, TextField, CssBaseline, Button } from '@mui/material'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/system'
 import {KeyRound} from 'lucide-react'
@@ -35,7 +35,7 @@ export default function LogIn() {
     const [sendButtonHovered, setSendButtonHovered] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showRemember, setShowRemember] = useState(false)
-    const [rememberAccount, setRememberAccount] = useState(false);
+    const [rememberAccount, setRememberAccount] = useState(true);
     const [forgotPassword,setForgotHover] = useState(false)
     const [hasAccount, setHasAccount] = useState(false);
     const navigate = useNavigate();

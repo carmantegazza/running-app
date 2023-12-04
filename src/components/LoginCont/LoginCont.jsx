@@ -1,6 +1,6 @@
-import React , { useEffect , useState, useRef } from 'react';
+import React , { useEffect , useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ButtonGroup, Button, Grid,Tooltip, Zoom } from "@mui/material";
+import { Button, Tooltip, Zoom } from "@mui/material";
 import { HiUser } from "@react-icons/all-files/hi/HiUser";
 import { useSelector, useDispatch } from 'react-redux';
 import userActions from '../../redux/actions/userActions';
@@ -29,7 +29,8 @@ const LoginCont = (props) => {
       { !user? 
         <section>
           <Link to="/login">
-            <Button variant='outlined' startIcon={<HiUser fontSize={35} color="#004aad" />}>
+            <Button variant='outlined' startIcon={<HiUser fontSize={35} color="#004aad" />}
+            style={{width:'auto'}}>
               Log In
             </Button>
           </Link>

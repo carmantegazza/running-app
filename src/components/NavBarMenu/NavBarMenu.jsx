@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Menu, MenuItem,Tooltip } from '@mui/material'
+import {Button, Menu, MenuItem} from '@mui/material'
 import { Link } from 'react-router-dom';
 import { RiMenu5Fill } from '@react-icons/all-files/ri/RiMenu5Fill'
 
@@ -37,24 +37,7 @@ const NavBarMenu = () => {
       >
         {pages.map((page) => (
           <Link to={page} key={page} style={{textDecoration: 'none'}}>
-            { page == "News"? (
-               <Tooltip
-               title="Soon"
-               arrow
-               TransitionProps={{timeout:500}}
-               TransitionComponent={'Zoom'}
-               followCursor>
-                <span>
-                  <MenuItem onClick={handleClose} sx={{color: '#004aad'}} disabled>{page}</MenuItem>
-                </span>
-              </Tooltip>
-            )
-            :
-            (              
-              <MenuItem onClick={handleClose} sx={{color: '#004aad'}}>{page}</MenuItem>
-            )
-
-            }
+              <MenuItem onClick={handleClose} sx={{color: '#004aad'}} disabled={ page === 'News'}>{page}</MenuItem>
           </Link>
         ))}
       </Menu>

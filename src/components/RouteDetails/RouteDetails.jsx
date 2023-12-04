@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { getRoutes } from '../../service/routeService'
-import { Typography, Card, CardContent, Grid, Box, Paper, Button } from '@mui/material'
+import { Typography, CardContent, Grid, Box, Button } from '@mui/material'
 import { getEventsFromOneRoute } from '../../service/eventService'
 import { Link } from 'react-router-dom'
 
