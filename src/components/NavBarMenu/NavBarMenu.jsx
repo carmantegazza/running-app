@@ -5,7 +5,7 @@ import { RiMenu5Fill } from '@react-icons/all-files/ri/RiMenu5Fill'
 
 const NavBarMenu = () => {
 
-  const pages = ['Routes', 'Events', 'News'];
+  const pages = ['Home', 'Routes', 'Events', 'News'];
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

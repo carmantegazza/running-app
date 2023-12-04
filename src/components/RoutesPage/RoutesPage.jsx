@@ -56,14 +56,14 @@ const RoutesPage = () => {
 
   return (
     <Box style={{
-      display:'flex',
-      flexDirection: isSmallScreen ? 'column' : 'row',
+      // display:'flex',
+      // flexDirection: isSmallScreen ? 'column' : 'row',
       marginTop:'80px',
       height:'68vh',
       width:'100%',
       border:'2px solid black'
     }}> 
-      <Grid container sx={{display:'flex', flexDirection:"column",width:'100%'}} gap="20px" padding="10px">
+      <Grid container sx={{display:'flex', flexDirection: isSmallScreen ? 'column' : 'row', width:'100%'}} gap="20px" padding="10px">
        
         <Grid item  sx={{width:'100px'}}>
           
