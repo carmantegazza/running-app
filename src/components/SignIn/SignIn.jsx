@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, {useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -20,7 +19,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton'
-
 
 export default function SignIn() {
     const dispatch = useDispatch()
@@ -47,8 +45,6 @@ export default function SignIn() {
             aplication: "training-app"
         };
         dispatch(userActions.signInUser(userData))
-        
-        
     };
     const googleSubmit = async (event) => {
 
@@ -61,8 +57,8 @@ export default function SignIn() {
             from: "google",
             aplication: "training-app"
         };
+       
             dispatch(userActions.signInUser(userData))
-    
         };
     
         const handleMouseEnter = () => {
@@ -99,7 +95,6 @@ export default function SignIn() {
                     </div>
                     <div className='image_container'></div>
                 </div>
-                
                 <Container component="main" maxWidth="xs" >
                     <CssBaseline />
                     <Box
@@ -125,10 +120,9 @@ export default function SignIn() {
                                     color='secondary'
                                 />
                                 <FormControl sx={{width:'100%'}} variant="outlined">
-                                    <InputLabel htmlFor="dynamic-password-TextField">Password</InputLabel>
+                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                     <OutlinedInput
-                                        id="password"
-                                        name='password'
+                                        id="outlined-adornment-password"
                                         type={showPassword ? 'text' : 'password'}
                                         endAdornment={
                                             <InputAdornment position="end">

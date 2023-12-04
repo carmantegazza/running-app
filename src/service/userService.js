@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const addFavEvent = async ( eventId, userId, user ) => {
+export const updateFavEvent = async ( eventId, userId, eventData ) => {
     try {
       const res = await axios.put(`http://localhost:4000/api/users/${userId}`, { eventId });
       console.log(res.data);
@@ -10,3 +10,12 @@ export const addFavEvent = async ( eventId, userId, user ) => {
       return []; 
     }
   };
+
+  export const getUser = async ( userId ) => {
+    try {
+       const res = await axios.get(`http://localhost:4000/api/user/${userId}`)
+      return res.data.route
+    } catch (error) {
+         return []
+    }
+  }

@@ -1,32 +1,35 @@
 import React from 'react';
-import { getEvents, updateEvent } from '../../service/eventService';
-import { addFavEvent } from '../../service/userService'
+import { getEvents } from '../../service/eventService';
+import { getUser } from '../../service/userService';
 import { useState, useEffect } from 'react';
-import { ButtonGroup, Stack, Divider, Card, CardHeader, CardContent, Typography, Avatar, Box, IconButton} from '@mui/material';
-import { FaRegCalendarPlus } from '@react-icons/all-files/fa/FaRegCalendarPlus.esm'
-import { TiTick } from '@react-icons/all-files/ti/TiTick.esm'
-import { FaRegHeart } from '@react-icons/all-files/fa/FaRegHeart.esm'
-import { FaHeart } from '@react-icons/all-files/fa/FaHeart.esm'
-import { FaInfo } from '@react-icons/all-files/fa/FaInfo.esm'
-import { Link } from 'react-router-dom';
+import { Stack, Divider, Card, CardHeader, CardContent, Typography, Avatar, Box, IconButton} from '@mui/material';
+import EventActions from '../EventActions/EventActions';
 import { useSelector } from 'react-redux';
 
 const EventsPage = () => {
     
-    const user = useSelector((store) => store.userReducer.user);
     const [allEvents, setAllEvents] = useState();
-    const [hasJoined, setHasJoined] = useState(false)
+    const user = useSelector((store) => store.userReducer.user);
+    const [userData, setUserData] = useState();
+  
+  useEffect(() => {
+    user &&
+    getUser(user.id).then((res) => {
+      setUserData(res); 
+    });
+  
+  }, [user])  
 
     useEffect(() => {
         getEvents().then((res) => {
           setAllEvents(res); 
         });
     
-      }, [])    
+      }, [])  
 
-    return (
+     return (
         <Stack
-        marginTop={5}
+        marginTop={10}
         paddingX={10}
         direction="column"
         divider={<Divider orientation="horizontal" flexItem />}
@@ -46,24 +49,7 @@ const EventsPage = () => {
                     </ CardContent>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  { !user ?
-                    <Typography variant='overline' textAlign='center' color='#004aad'>Log in to join the event!
-                    </Typography> :
-                    <ButtonGroup>
-                      {!event.usersJoin.includes(user.id) ?
-                      <IconButton onClick={() => updateEvent(event._id, user.id, user)}> 
-                        <FaRegCalendarPlus /> 
-                      </IconButton>:
-                      <IconButton disabled> <TiTick/> </IconButton>                        
-                      }
-                      {!user.favEvents ? 
-                      <IconButton onClick={() => addFavEvent( event._id, user.id, user )}> <FaRegHeart /> </IconButton>:
-                      <IconButton> <FaHeart color='#C41E3D'/> </IconButton>
-                      }
-                      <Link to={`/event/${event._id}`}>
-                        <IconButton> <FaInfo color="#004aad"/> </IconButton>
-                      </Link></ButtonGroup> 
-                   }
+                  <EventActions eventData={event} userData={userData}/>
                 </Box>
                 
               </Card>
