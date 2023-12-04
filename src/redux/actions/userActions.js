@@ -243,6 +243,17 @@ const userActions = {
     ForgotPassword: async (email) => {
         const serverResponse = await axios.get(`${urlBackend}/api/users/auth/forgotpassword`, { params: { email } })
         console.log(serverResponse)
+    },
+    changePassword: (userData)=>{
+        return async (dispatch,getState)=>{
+            try{
+                const user = await axios.post(`${urlBackend}/api/users/auth/changePassword`, userData)
+            }catch(e){
+                console.error(e)
+            }
+            
+        }
+        
     }
 }
 export default userActions;
