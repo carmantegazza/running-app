@@ -1,26 +1,61 @@
 import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
-import { getEvent } from '../../service/eventService'
+import { getRoute } from '../../service/routeService'
+import { getEvent, updateEvent } from '../../service/eventService';
 import { Typography, Grid, Button, Box, CardContent } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import Profile from '../Profile/Profile'
 
 const EventDetails = () => {
+
+  const user = useSelector((store) => store.userReducer.user);
+  const [isSubscribed, setSubscribed] = useState(false);
+
   const [eventData, setEventData] = useState();
-  const { id } = useParams(); 
+  const { id } = useParams();
+  const [routeData, setRouteData] = useState();
+
+  const fetchRouteData = async (route) => {
+    try {
+      const routeId = route;
+      const data = await getRoute(routeId);
+      setRouteData(data);
+    } catch (error) {
+      console.error('Error al obtener los datos de eventos:', error);
+    }
+  }
 
   useEffect(() => {
-    console.log(id)
     getEvent(id).then((res) => {
-      console.log(res)
-      setEventData(res); 
-      
+      setEventData(res);
     });
-    console.log(eventData)
+  }, [id]);
 
-  }, [id])
+  useEffect(() => {
+    if (eventData && eventData.route) {
+      fetchRouteData(eventData.route);
+    }
+  }, [eventData]);
 
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
 
+  const handleSubscribeClick = async () => {
+    try {
+      await updateEvent(eventData._id, user.id, user);
+      setButtonDisabled(true);
+      setSubscribed(true);
+    } catch (error) {
+      console.error('Error al suscribirse al evento:', error);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate(-1); // Esta función es equivalente a history.goBack()
+  };
 
   const borderBottomStyle = {
     borderBottom: '1px solid #ccc',
@@ -65,7 +100,9 @@ const EventDetails = () => {
                 </div>
               </>
             )}
+
           </Grid>
+
           {eventData && (
             <>
               <Grid item xs={4}>
@@ -73,39 +110,66 @@ const EventDetails = () => {
                   <p style={{ ...borderBottomStyle }}>Location</p>
                   <p style={{ ...borderBottomStyle }}>Organizer</p>
                   <p style={{ ...borderBottomStyle }}>Inscription Fee</p>
+                  <p style={{ ...borderBottomStyle }}>Date</p>
                   <p >Description</p>
                 </Typography>
               </Grid>
 
               <Grid item xs={4}>
                 <Typography component="div" style={{ textAlign: 'left' }}>
-                <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{eventData.route.location || 'pending...'} </p>
+                  <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData && (routeData.location) || 'pending...'} </p>
                   <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{eventData.organizer || 'pending...'} </p>
                   <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>US${eventData.price || 'pending...'}</p>
+                  <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{(new Date(eventData.date)).toLocaleDateString('es-ES', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                  }) || 'pending...'}</p>
                   <p style={{ marginBottom: '8px' }}>{eventData.description || 'pending...'}</p>
                 </Typography>
 
-                <Typography component="div" style={{ textAlign: 'right', paddingTop: '20px' }}>
-                  <Link to={`/routes/${eventData.route}`}>
-                    <Button style={{ margin: '2px', backgroundColor: "rgba(63, 101, 154)", color: "white" }} size='large' >
-                      BACK ...
-                    </Button>
-                  </Link>
-                </Typography>
+
               </Grid>
+              <Grid container alignItems="center" direction="column">
+                <Grid item>
+                  {!user ?
+                    <Link to={`/signin`}>
+                      <Button style={{ margin: '10px', borderBottom: '2px solid #1976d2' }} size='large' >
+                        Log in to join the event!
+                      </Button>
+                    </Link> :
+                    <>
+                      {!eventData.usersJoin.includes(user.id) ?
+                        <Link>
+                          <Button style={{ margin: '10px', borderBottom: '2px solid #1976d2' }} size='large' onClick={handleSubscribeClick}
+                            disabled={isButtonDisabled}>
+                            {isSubscribed ? 'Subscribed to this event' : 'Subscribe to this event'}
+                          </Button>
+                        </Link> :
+                        <Link>
+                          <Button style={{ margin: '10px', borderBottom: '2px solid #1976d2' }} size='large' disabled>
+                            Subscribed to this event
+                          </Button>
+                        </Link>
+                      }
+                    </>
+                  }
 
-              <Link to={`/signin`}>
-                <Button style={{margin: '10px', borderBottom: '2px solid #1976d2'}} size='large' >
-                  Subscribe to this event
-                </Button>
-              </Link>
+                </Grid>
 
+                <Grid item >
+                  <Button onClick={handleBackClick} style={{ margin: '2px', backgroundColor: "rgba(63, 101, 154)", color: "white" }} size='large'>
+                    BACK
+                  </Button>
+                </Grid>
+              </Grid>
             </>
           )}
 
         </Grid>
-
       </Grid>
+
+      <Profile></Profile>
     </CardContent>
 
   )

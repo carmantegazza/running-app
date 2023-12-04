@@ -22,6 +22,7 @@ const EventsPage = () => {
           setAllEvents(res); 
         });
     
+      console.log(user)
       }, [])    
 
     return (

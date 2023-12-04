@@ -10,3 +10,14 @@ export const addFavEvent = async ( eventId, userId, user ) => {
       return []; 
     }
   };
+
+  export const updateUser = async (userId, user) => {
+    try {
+      const res = await axios.put(`http://localhost:4000/api/users/${userId}`, { user });
+      return res.data; 
+    } catch (error) {
+      console.error('Error en la solicitud PUT:', error);
+      return []; 
+    }
+  };
+

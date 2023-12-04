@@ -14,9 +14,7 @@ export const getEventsFromOneRoute = async (routeId) => {
  export const getEvent = async (eventId) => {
   try {
      const request =  await fetch(`http://localhost:4000/api/event/${eventId}`)
-     console.log(request)
     const data = await request.json()
-    console.log(data)
     return data.event
   } catch (error) {
        return []
@@ -43,6 +41,19 @@ export const updateEvent = async (eventId, userId, user) => {
     return []; 
   }
 };
+
+
+export const deleteUserByEvent = async (eventId, userId) => {
+  try {
+    const res = await axios.delete(`http://localhost:4000/api/event/${eventId}`, { userId });
+    return res.data; 
+  } catch (error) {
+    console.error('Error en la solicitud DELETE:', error);
+    return []; 
+  }
+};
+
+
 
 
  
