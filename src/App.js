@@ -13,6 +13,7 @@ import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Snack from './components/Snackbar/Snackbar';
 import ChangePassword from './components/ChangePassword/ChangePassword';
+import Profile from "./components/Profile/Profile";
 import { useEffect } from "react";
 import userActions from "./redux/actions/userActions";
 
@@ -47,6 +48,7 @@ export default function App() {
         {!user && <Route path="/signin" element={<SignIn />} />}
         {!user && <Route path="/signup" element={<SignUp />} />} 
         <Route path="/forgotpassword" element={<ChangePassword/>}></Route>
+        <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
       <StickyFooter style={{
         position: 'absolute',
