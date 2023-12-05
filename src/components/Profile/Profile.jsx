@@ -139,7 +139,7 @@ const Profile = () => {
     });
 
     return (
-        <Grid>
+        <Grid sx={{marginX:'auto', width:'400px', paddingTop:'200px', height:'76.5vh'}} >
             {userData && (
                 <Paper elevation={3} style={{ padding: '30px', maxWidth: '400px', margin: 'auto' }}>
                     {/* <CircularAvatar alt="User Avatar" src={user.avatarUrl} onClick={handleAvatarClick}>

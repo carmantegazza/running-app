@@ -83,9 +83,10 @@ const RoutesPage = () => {
         <Grid item  >
           <Grid container
           display='flex'
+          justifyContent='center'
           flexDirection= 'column'
           marginTop='45px'
-          sx={{width:'100px',}}>
+          sx={{width:'auto',}}>
             <Grid item paddingY='15px'>
               <Typography variant='h6'>Filter by location: </Typography>
               <FormControl sx={{ minWidth: 300 }}>

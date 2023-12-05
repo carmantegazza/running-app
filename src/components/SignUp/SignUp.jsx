@@ -228,15 +228,17 @@ const SignUp = () => {
                                 </Grid>
 
                             </div>
-                            <button
+                            <Button
+                                variant='outlined'
                                 style={{
+                                    marginTop:'5%',
                                     marginLeft: '25%',
                                     width: '50%',
                                     height: '50px',
                                     cursor: 'pointer',
-                                    borderRadius: '20px',
-                                    backgroundColor: isHovered ? 'rgb(87, 141, 255,0.7)' : 'rgb(87, 141, 255,0.5)',
+                                    backgroundColor: isHovered ? 'rgb(255, 255, 255,0.7)' : 'rgb(255, 255, 255,0.5)',
                                 }}
+                                // 'rgb(87, 141, 255,0.7)' : 'rgb(87, 141, 255,0.5)'
                                 onMouseEnter={hovers.handleMouseEnter}
                                 onMouseLeave={hovers.handleMouseLeave}
                                 type="submit"
@@ -244,7 +246,7 @@ const SignUp = () => {
                                 <span>
                                     SIGN UP
                                 </span>
-                            </button>
+                            </Button>
 
                             <div style={{ display: 'flex', justifyContent: 'end' }}>
                                 <LinkRouter to='/login' className="liks_router links_forms"> Sign In </LinkRouter>
