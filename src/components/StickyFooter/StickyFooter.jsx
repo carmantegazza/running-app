@@ -58,8 +58,7 @@ export default function StickyFooter() {
               About Us
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              We are a company dedicated to providing the best service to our
-              customers.
+            Personalized coaching for peak performance and adventure.
             </Typography>
             </Grid>
           <Grid item xs={12} sm={4}>

@@ -31,7 +31,7 @@ const RouteDetails = () => {
 
   return (
 
-    <CardContent>
+    <CardContent sx={{marginTop: '12vh'}}>
       {routeData && (
         <>
           <Typography variant="h4" sx={{ textShadow: '5px 5px 8px rgba(0, 0, 0, 0.2)', marginBottom: '25px', textAlign: 'center', fontFamily: "Helvetica", color: "rgba(63, 101, 154)", fontWeight: 'bold' }} component="div">
@@ -117,21 +117,23 @@ const RouteDetails = () => {
                   )}
                 </Grid>
 
-                <Grid item xs={3}>
-                  {eventsData && eventsData.length ? (
-                    eventsData.map((event, index) => (
-                      <div key={index}>
-                        <Typography component="div" style={{ textAlign: 'right' }}>
-                          <Link to={`/event/${event._id}`}>
-                            <Button style={{ margin: '10px', backgroundColor: "rgba(63, 101, 154)", color: "white" }} 
-                                    endIcon={<FaInfo color='white'/>}>
-                                    More Info</Button>
-                            </Link>
-                          </Typography>
-                      </div>
-                    ))
-                  ) : null}
-                </Grid>
+
+                     <Grid item xs={3}>
+                     {eventsData && eventsData.length ? (
+                       eventsData.map((event, index) => (
+                         <div key={index}>
+                           <Typography component="div" style={{ textAlign: 'right' }}>
+                             <Link to={`/event/${event._id}`}>
+                               <Button style={{ margin: '10px', backgroundColor: "rgba(63, 101, 154)", color: "white" }} 
+                                       endIcon={<FaInfo color='white'/>}>
+                                       More Info</Button>
+                               </Link>
+                             </Typography>
+                         </div>
+                       ))
+                     ) : null}
+                   </Grid>
+               
               </Grid>
             </Grid>
           </Grid>

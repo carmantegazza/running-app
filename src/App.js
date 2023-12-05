@@ -29,7 +29,6 @@ export default function App() {
     if (userToken !== null) {
       dispatch(userActions.VerificarToken(userToken))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
