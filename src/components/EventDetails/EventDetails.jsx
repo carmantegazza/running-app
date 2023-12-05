@@ -6,7 +6,6 @@ import { getEvent, updateEvent } from '../../service/eventService';
 import { Typography, Grid, Button, Box, CardContent } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import Profile from '../Profile/Profile'
 
 const EventDetails = () => {
 
@@ -54,7 +53,7 @@ const EventDetails = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate(-1); // Esta función es equivalente a history.goBack()
+    navigate(-1); 
   };
 
   const borderBottomStyle = {
@@ -65,7 +64,7 @@ const EventDetails = () => {
   return (
 
 
-    <CardContent>
+    <CardContent sx={{marginTop: '12vh', marginBottom: '8vh'}}>
       <Grid item xs={6} sx={{ justifyContent: 'center', alignItems: 'center', height: '67vh' }} >
         <Box
           bgcolor="rgba(63, 101, 154)"
@@ -84,11 +83,10 @@ const EventDetails = () => {
         </Box>
         <Grid container spacing={2} sx={{ justifyContent: 'center', display: 'flex' }}>
           <Grid item xs={4} sx={{ justifyContent: 'center', display: 'flex' }}>
-            {/* Left side: Titles */}
             {eventData && (
               <>
                 <div style={{
-                  backgroundImage: eventData ? `url(${eventData.organizer_img})` : 'none',
+                  backgroundImage: eventData.organizer_img ? `url(${eventData.organizer_img})` : 'none',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
@@ -114,7 +112,6 @@ const EventDetails = () => {
                   <p >Description</p>
                 </Typography>
               </Grid>
-
               <Grid item xs={4}>
                 <Typography component="div" style={{ textAlign: 'left' }}>
                   <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData && (routeData.location) || 'pending...'} </p>
@@ -127,8 +124,6 @@ const EventDetails = () => {
                   }) || 'pending...'}</p>
                   <p style={{ marginBottom: '8px' }}>{eventData.description || 'pending...'}</p>
                 </Typography>
-
-
               </Grid>
               <Grid container alignItems="center" direction="column">
                 <Grid item>

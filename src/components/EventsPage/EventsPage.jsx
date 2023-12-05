@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Stack, Divider, Card, CardHeader, CardContent, Typography, Avatar, Box, IconButton} from '@mui/material';
 import EventActions from '../EventActions/EventActions';
 import { useSelector } from 'react-redux';
+import '../Home/Home.css'
 
 const EventsPage = () => {
     
@@ -18,7 +19,7 @@ const EventsPage = () => {
       setUserData(res); 
     });
   
-  }, [user])  
+  }, [])  
 
     useEffect(() => {
         getEvents().then((res) => {
@@ -28,9 +29,23 @@ const EventsPage = () => {
       }, [])  
 
      return (
-        <Stack
-        marginTop={10}
+      <>
+      <Box sx={{backgroundColor: 'rgba(63, 101, 154)',     
+                boxShadow: '0px 100px 55px 90px rgba(63, 101, 154)',
+                marginTop: '12vh',
+                paddingY: '5vh',
+                // position: 'fixed',
+                width: '100vw',}}> 
+        <Typography  variant='h3' color='white' textAlign='center' > Run Inspired </Typography>
+        <Typography  variant='h5' color='white' textAlign='center'  >  Elevate your runs on the track and hikes on the trail, join our athlete hosted events! </Typography>
+      </Box>
+
+      <Stack
+        // position='relative'
+        // zIndex='1'
+        // marginTop='40vh'
         paddingX={10}
+        // overflow= 'hidden'
         direction="column"
         divider={<Divider orientation="horizontal" flexItem />}
         spacing={2}
@@ -57,6 +72,7 @@ const EventsPage = () => {
         })}
 
       </Stack>
+      </>
   )
 }
 

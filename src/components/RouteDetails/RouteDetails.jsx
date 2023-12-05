@@ -1,34 +1,28 @@
 import React from 'react'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
-import { getRoutes } from '../../service/routeService'
 import { Typography, CardContent, Grid, Box, Button } from '@mui/material'
-import { getEventsFromOneRoute } from '../../service/eventService'
+import { getEvents } from '../../service/eventService'
+import { getRoute } from '../../service/routeService'
 import { Link } from 'react-router-dom'
+import { FaInfo } from '@react-icons/all-files/fa/FaInfo.esm'
 
 const RouteDetails = () => {
-  const [routeData, setRouteData] = useState(); // Estado para almacenar datos de rutas
-  const [eventsData, setEventData] = useState(); // Estado para almacenar datos de eventos
-  const { id } = useParams(); // Obtiene el parámetro 'id' de la URL
+  const [routeData, setRouteData] = useState(); 
+  const [eventsData, setEventsData] = useState(); 
+  const { id } = useParams(); 
 
   useEffect(() => {
-    getRoutes().then((res) => {
-      setRouteData(res.filter((route) => route._id === id))
+
+    getRoute(id).then((res) => {
+      setRouteData(res)
+    })
+    getEvents().then((res) => {
+      const data = res
+      setEventsData(data.filter((event) => id == event.route))
     })
 
-    const fetchEventsData = async () => {
-      try {
-        const routeId = id; // Utilizamos el 'id' de la URL
-        const data = await getEventsFromOneRoute(routeId);
-        setEventData(data); // Actualizamos el estado con los datos de eventos
-
-      } catch (error) {
-        console.error('Error al obtener los datos de eventos:', error);
-      }
-    };
-
-    fetchEventsData();
-  }, [id]); // Este efecto se ejecuta cuando 'id' cambia
+  }, [id]); 
 
   const borderBottomStyle = {
     borderBottom: '1px solid #ccc',
@@ -37,30 +31,27 @@ const RouteDetails = () => {
 
   return (
 
-    <CardContent>
+    <CardContent sx={{marginTop: '12vh'}}>
       {routeData && (
         <>
           <Typography variant="h4" sx={{ textShadow: '5px 5px 8px rgba(0, 0, 0, 0.2)', marginBottom: '25px', textAlign: 'center', fontFamily: "Helvetica", color: "rgba(63, 101, 154)", fontWeight: 'bold' }} component="div">
-            {routeData[0].name.toUpperCase()}
+            {routeData.name.toUpperCase()}
           </Typography>
           <Grid container spacing={2} >
-            {/* Left side */}
             <Grid item xs={6}>
               <div
                 style={{
-                  backgroundImage: routeData ? `url(${routeData[0].image})` : 'none',
+                  backgroundImage: routeData ? `url(${routeData.image})` : 'none',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
                   height: '500px',
-                  width: '100%', // Adjust to your preference
+                  width: '100%', 
                   borderRadius: '30px',
                   boxShadow: '0 4px 4px rgb(103, 103, 103)'
                 }}
               ></div>
             </Grid>
-
-            {/* Right side */}
             <Grid item xs={6}>
               <Box
                 bgcolor="rgba(63, 101, 154)"
@@ -77,7 +68,6 @@ const RouteDetails = () => {
               </Box>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  {/* Left side: Titles */}
                   <Typography component="div" style={{ textAlign: 'left', color: '#004aad' }}>
                     <p style={{ ...borderBottomStyle }}>Distance</p>
                     <p style={{ ...borderBottomStyle }}>Location</p>
@@ -88,13 +78,12 @@ const RouteDetails = () => {
                 </Grid>
 
                 <Grid item xs={6}>
-                  {/* Right side: Information from the database */}
                   <Typography component="div" style={{ textAlign: 'left' }}>
-                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.distance || 'pending...'} mi</p>
-                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.location || 'pending...'}</p>
-                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.difficulty || 'pending...'}</p>
-                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData[0]?.elevation_gain || 'pending...'}</p>
-                    <p style={{ ...borderBottomStyle }}>{routeData[0]?.estimated_moving_time || 'pending...'}</p>
+                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData?.distance || 'N/A'} mi</p>
+                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData?.location || 'N/A'}</p>
+                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData?.difficulty|| 'N/A'}</p>
+                    <p style={{ ...borderBottomStyle, marginBottom: '8px' }}>{routeData?.elevation_gain || 'N/A'}</p>
+                    <p style={{ ...borderBottomStyle }}>{routeData[0]?.estimated_moving_time || 'N/A'}</p>
                   </Typography>
                 </Grid>
               </Grid>
@@ -115,8 +104,7 @@ const RouteDetails = () => {
 
               <Grid container spacing={2}>
                 <Grid item xs={9}>
-                  {/* Left side: Titles */}
-                  {eventsData && eventsData.length ? (
+                  {eventsData && eventsData.length > 0 ? (
                     eventsData.map((event, index) => (
                       <div key={index}>
                         <Typography component="div" style={{ textAlign: 'left', color: '#004aad' }}>
@@ -129,24 +117,25 @@ const RouteDetails = () => {
                   )}
                 </Grid>
 
-                <Grid item xs={3}>
-                  {/* Right side: More Info links */}
-                  {eventsData && eventsData.length ? (
-                    eventsData.map((event, index) => (
-                      <div key={index}>
-                        <Typography component="div" style={{ textAlign: 'right' }}>
-                          <Link to={`/event/${event._id}`}>
-                            <Button style={{ margin: '10px', backgroundColor: "rgba(63, 101, 154)", color: "white" }}>More Info</Button>
-                          </Link>
-                        </Typography>
-                      </div>
-                    ))
-                  ) : null}
-                </Grid>
+
+                     <Grid item xs={3}>
+                     {eventsData && eventsData.length ? (
+                       eventsData.map((event, index) => (
+                         <div key={index}>
+                           <Typography component="div" style={{ textAlign: 'right' }}>
+                             <Link to={`/event/${event._id}`}>
+                               <Button style={{ margin: '10px', backgroundColor: "rgba(63, 101, 154)", color: "white" }} 
+                                       endIcon={<FaInfo color='white'/>}>
+                                       More Info</Button>
+                               </Link>
+                             </Typography>
+                         </div>
+                       ))
+                     ) : null}
+                   </Grid>
+               
               </Grid>
             </Grid>
-
-            
           </Grid>
         </>
       )}

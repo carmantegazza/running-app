@@ -82,6 +82,8 @@ const Profile = () => {
 
             console.log(userData)
 
+            await updateUser(userData._id, userData.fullName, userData.email)
+
             for (const eventId of subEventsToDelete) {
                 await unsuscribeFromEvent(eventId, userData._id);
             }
@@ -167,7 +169,11 @@ const Profile = () => {
     });
 
     return (
-        <Grid>
+        <Grid sx={{backgroundColor: 'rgba(63, 101, 154)',     
+        boxShadow: '0px 80px 55px 45px rgba(63, 101, 154)',
+        marginTop: '12vh',
+        paddingY: '5vh',
+        width: '100vw',}}>
             {userData && (
                 <Paper elevation={3} style={{ padding: '30px', maxWidth: '400px', margin: 'auto' }}>
                     {/* <CircularAvatar alt="User Avatar" src={user.avatarUrl} onClick={handleAvatarClick}>
