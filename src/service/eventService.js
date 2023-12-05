@@ -53,6 +53,18 @@ export const deleteUserByEvent = async (eventId, userId) => {
 };
 
 
+export const unsuscribeFromEvent = async ( eventId, userId, eventData ) => {
+  try {
+    const res = await axios.put(`http://localhost:4000/api/events/${eventId}`, { userId });
+    console.log(res.data);
+    return res.data; 
+  } catch (error) {
+    console.error('Error en la solicitud PUT:', error);
+    return []; 
+  }
+};
+
+
 
 
 
