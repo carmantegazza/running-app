@@ -123,9 +123,9 @@ export default function LogIn() {
                 setShowPassword(false)
             }
         },
-        forgot:()=>{
+        forgot: async ()=>{
             let user = document.getElementById('email').value;
-            userActions.ForgotPassword(user);
+            dispatch(userActions.ForgotPassword(user));
         }
     }
     const handleHovers = {
@@ -263,7 +263,8 @@ export default function LogIn() {
                                             onMouseEnter={handleHovers.remember.handleMouseEnter} 
                                             onMouseLeave={handleHovers.remember.handleMouseLeave} 
                                             value="remember" 
-                                            color="secondary"/>
+                                            color="secondary"
+                                            defaultChecked={rememberAccount}/>
                                     </Tooltip>
 
                                     <Button

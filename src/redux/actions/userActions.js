@@ -240,9 +240,37 @@ const userActions = {
                 })
         }
     },
-    ForgotPassword: async (email) => {
-        const serverResponse = await axios.get(`${urlBackend}/api/users/auth/forgotpassword`, { params: { email } })
-        console.log(serverResponse)
+    ForgotPassword: (email) => {
+        
+        return async (dispatch,getState)=>{
+            try{
+                const serverResponse = await axios.get(`${urlBackend}/api/users/auth/forgotpassword`, { params: { email } })
+                if(serverResponse.data.success){
+                     dispatch({
+                         type: "message",
+                         payload:
+                         {
+                             view: serverResponse.data.success,
+                             message: serverResponse.data.message,
+                             success: true
+                         }
+                     })
+                }else{
+                     dispatch({
+                         type: "message",
+                         payload:
+                         {
+                             view: serverResponse.data.success,
+                             message: serverResponse.data.message,
+                             success: false
+                         }
+                     })
+                }
+                
+            }catch(err){
+                console.error('Internal error', err)
+            }
+        } 
     },
     changePassword: (userData)=>{
         return async (dispatch,getState)=>{
