@@ -24,7 +24,6 @@ const LoginCont = (props) => {
     userChange && navigate('/')
   }, [userChange]);
 
-  console.log(user)
 
   return (
     <>
