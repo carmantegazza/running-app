@@ -277,7 +277,6 @@ export default function LogIn() {
                                             height: '50px',
                                             cursor: 'pointer',
                                             backgroundColor: sendButtonHovered ? 'rgb(87, 141, 255,0.2)' : 'rgb(255, 255, 255,0.5)',
-                                            boxShadow: isHovered ? 'inset 5px 5px 5px black' : 'none',
                                         }}>
                                         Send
                                     </Button>

@@ -74,9 +74,7 @@ const userActions = {
     onVerifyFail: {
         SendEmail: (userData) => {
             return async (dispatch, getState) => {
-                console.log('entering SendEmail')
                 try {
-                    console.log('entering SendEmail try logic')
                     const serverRes = await axios.post(`${urlBackend}/api/users/auth/sendemail`, { userData })
                     console.log(serverRes.data.success)
                     if (serverRes.data.success) {
