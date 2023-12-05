@@ -29,7 +29,7 @@ const EventsPage = () => {
 
      return (
       <>
-      <Typography variant='h3'> All the events </Typography>
+      <Typography marginTop='15vh' variant='h3'> All the events </Typography>
         <Stack
         paddingX={10}
         direction="column"
