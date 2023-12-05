@@ -5,7 +5,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { updateUser, getUser } from '../../service/userService';
-import { getEvents, deleteUserByEvent } from '../../service/eventService';
+import { getEvents, unsuscribeFromEvent } from '../../service/eventService';
 import { FaHeart } from '@react-icons/all-files/fa/FaHeart.esm';
 import { useSelector } from 'react-redux';
 
@@ -82,7 +82,7 @@ const Profile = () => {
 
             await updateUser(userData.id, user);
             subEvents.forEach(async (event) => {
-                await deleteUserByEvent(event.id, userData.id);
+                // await deleteUserByEvent(event.id, userData.id);
             });
 
         } catch (error) {

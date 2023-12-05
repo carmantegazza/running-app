@@ -45,7 +45,6 @@ const LoginCont = (props) => {
 
             <div style={{ width: '100%', alignItems: 'center', justifyContent: 'space-between', display: 'flex', opacity: userConfigOpen ? '1' : '0', transition: 'opacity 1s ease-in-out' }}>
               <Tooltip
-                title="Soon"
                 arrow
                 TransitionProps={{ timeout: 500 }}
                 TransitionComponent={Zoom}

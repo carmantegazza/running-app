@@ -1,16 +1,5 @@
 import axios from "axios";
 
-export const getEventsFromOneRoute = async (routeId) => {
-   try {
-     const request = await fetch(`http://localhost:4000/api/eventforroute/${routeId}`);
-     const data = await request.json();
-     return data.events;
-   } catch (error) {
-     return [];
-   }
- };
-
-
  export const getEvent = async (eventId) => {
   try {
     const request =  await fetch(`http://localhost:4000/api/event/${eventId}`)
@@ -41,16 +30,17 @@ export const updateEvent = async (eventId, userId, user) => {
   }
 };
 
-
-export const deleteUserByEvent = async (eventId, userId) => {
+export const unsuscribeFromEvent = async (eventId, userId, user) => {
   try {
-    const res = await axios.delete(`http://localhost:4000/api/event/${eventId}`, { userId });
+    const res = await axios.put(`http://localhost:4000/api/event/${eventId}`, { userId });
     return res.data; 
   } catch (error) {
-    console.error('Error en la solicitud DELETE:', error);
+    console.error('Error en la solicitud PUT:', error);
     return []; 
   }
 };
+
+
 
 
 

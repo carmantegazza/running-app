@@ -13,9 +13,9 @@ let difficultyColor = (difficulty)=>{
     }
 }
 
-
 const RouteElement = ({infoRoute}) => {
-    const [isHovered, setIsHovered] = useState(false);
+  
+   const [isHovered, setIsHovered] = useState(false);
 
     const handleHover = () => {
       setIsHovered(true);
@@ -24,6 +24,7 @@ const RouteElement = ({infoRoute}) => {
     const handleUnhover = () => {
       setIsHovered(false);
     };
+
     return (
             <Grid
                 item

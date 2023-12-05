@@ -50,10 +50,7 @@ export default function App() {
         <Route path="/forgotpassword" element={<ChangePassword/>}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
-      <StickyFooter style={{
-        position: 'absolute',
-        bottom: '0'
-      }} />
+      <StickyFooter />
     </div>
   );
 }

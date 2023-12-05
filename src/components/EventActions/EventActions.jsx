@@ -7,9 +7,8 @@ import { FaRegCalendarPlus } from '@react-icons/all-files/fa/FaRegCalendarPlus.e
 import { TiTick } from '@react-icons/all-files/ti/TiTick.esm'
 import { FaRegHeart } from '@react-icons/all-files/fa/FaRegHeart.esm'
 import { FaHeart } from '@react-icons/all-files/fa/FaHeart.esm'
-import { FaInfo } from '@react-icons/all-files/fa/FaInfo.esm'
+import { FaInfo } from '@react-icons/all-files/fa/FaInfo.esm';
 import { Link } from 'react-router-dom';
-
 
 const EventActions = ({eventData, userData}) => {
 
@@ -25,33 +24,33 @@ const EventActions = ({eventData, userData}) => {
       console.error('Error updating event:', error);
 
     }
-
   };
 
   const handleUpdateFavEvent = async (eventId) => {
     try {
-      await updateFavEvent(eventId, user._id , eventInfo);
-      
+      await updateFavEvent(eventId, user._id , eventInfo);  
       const updateduser = await getUser(user._id);
-  
       setUser(user => ({ ...user, ...updateduser }));
     } catch (error) {
       console.error('Error updating fav event:', error);
     }
   };
 
-
   return (
     <>
-    { !user ?
-      <Typography variant='overline' textAlign='center' color='#004aad'>Log in to join the event!
-      </Typography> :
+    { !userData ?
+      <Link to={`/signin`}  style={{textDecoration: 'none'}}>
+        <Typography variant='overline' textAlign='center' color='#004aad' >      
+          Log in to join the event!
+      </Typography>
+      </Link>
+       :
       <ButtonGroup>
         {!eventInfo.usersJoin.includes(user._id) ?
         <IconButton onClick={() => handleUpdateEvent(eventInfo._id, user._id)} title='Join the event!'> 
           <FaRegCalendarPlus /> 
         </IconButton>:
-        <IconButton disabled> <TiTick /> </IconButton>                        
+        <IconButton size='medium' disabled> <TiTick /> </IconButton>                        
         }
         <IconButton onClick={() => handleUpdateFavEvent(eventInfo._id)}>
           {user.favEvents ?
