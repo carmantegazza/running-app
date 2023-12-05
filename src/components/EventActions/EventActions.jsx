@@ -14,8 +14,9 @@ import { useDispatch } from "react-redux";
 
 const EventActions = ({eventData, userData}) => {
 
-  const [user, setUser] = useState(userData)
+  const [user, setUser] = useState(userData);
   const [eventInfo, setEventInfo] = useState(eventData)
+  
   console.log(user)
 
   const dispatch = useDispatch()

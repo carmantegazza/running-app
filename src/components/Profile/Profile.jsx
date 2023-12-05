@@ -4,16 +4,21 @@ import { styled } from '@mui/system';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { updateUser, getUser } from '../../service/userService';
+import { updateUser, getUser, updateFavEvent } from '../../service/userService';
 import { getEvents, unsuscribeFromEvent } from '../../service/eventService';
 import { FaHeart } from '@react-icons/all-files/fa/FaHeart.esm';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 
 const Profile = () => {
     const [isEditing, setEditing] = useState(false);
     const user = useSelector((store) => store.userReducer.user);
 
     const [userData, setUserData] = useState();
+    const [reloadComponent, setReloadComponent] = useState(false);
+
+    const dispatch = useDispatch();
 
     const [allEvents, setAllEvents] = useState([]);
     const [subEvents, setSubEvents] = useState([]);
@@ -35,7 +40,7 @@ const Profile = () => {
                 setTempEmail(res?.email || '');
             });
         }
-    }, [user]);
+    }, [user, reloadComponent]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,7 +53,7 @@ const Profile = () => {
         };
 
         fetchData();
-    }, []);
+    }, [reloadComponent]);
 
     useEffect(() => {
         if (userData && allEvents.length > 0) {
@@ -70,21 +75,25 @@ const Profile = () => {
         try {
             setEditing(false);
 
-            setSubEvents((prev) => prev.filter((event) => !subEventsToDelete.includes(event._id)));
-            setFavEvents((prev) => prev.filter((event) => !favEventsToDelete.includes(event._id)));
-
-            setSubEventsToDelete([]);
-            setFavEventsToDelete([]);
+            console.log("informacoin de subEvents" + subEvents)
 
             userData.fullName = tempFullName;
             userData.email = tempEmail;
-            userData.favEvents = favEvents;
 
-            await updateUser(userData.id, user);
-            subEvents.forEach(async (event) => {
-                // await deleteUserByEvent(event.id, userData.id);
-            });
+            console.log(userData)
 
+            await updateUser(userData._id, userData.fullName, userData.email)
+
+            for (const eventId of subEventsToDelete) {
+                await unsuscribeFromEvent(eventId, userData._id);
+            }
+
+            for (const eventId of favEventsToDelete) {
+                await updateFavEvent(eventId, userData._id);
+            }
+
+            setReloadComponent(prevState => !prevState);
+            
         } catch (error) {
             console.error('Error updating user:', error);
         }
@@ -95,18 +104,39 @@ const Profile = () => {
 
         setTempFullName(userData.fullName);
         setTempEmail(userData.email);
-        // setTempDob(user.dob);
 
         setSubEventsToDelete([]);
         setFavEventsToDelete([]);
     };
 
-    const handleAvatarClick = () => {
-        // Aquí puedes implementar la lógica para cargar una nueva imagen.
-        // Por ejemplo, abrir un cuadro de diálogo para seleccionar un archivo.
-        // Luego, actualiza el estado con la nueva URL de la imagen.
-        console.log('Cambiar imagen de perfil');
-    };
+    // const handleUpdateFavEvent = async (eventId) => {
+    //     try {
+    //         await updateFavEvent(eventId, userData._id);
+
+    //         const updatedUser = await getUser(userData._id);
+
+    //         setUserData(userData => ({ ...userData, ...updatedUser }));
+    //         dispatch({ type: 'UPDATE_USER', payload: updatedUser }); // Ajusta según tu lógica de acción
+
+    //     } catch (error) {
+    //         console.error('Error updating fav event:', error);
+    //     }
+    // };
+
+
+    // const handleUpdateSubEvent = async (eventId) => {
+    //     try {
+    //         await unsuscribeFromEvent(eventId, userData._id);
+
+    //         const updatedUser = await getUser(userData._id);
+
+    //         setUserData(userData => ({ ...userData, ...updatedUser }));
+    //         dispatch({ type: 'UPDATE_USER', payload: updatedUser }); // Ajusta según tu lógica de acción
+
+    //     } catch (error) {
+    //         console.error('Error updating fav event:', error);
+    //     }
+    // };
 
     const saveEachSubEventToDelete = (eventId) => {
 
@@ -139,7 +169,11 @@ const Profile = () => {
     });
 
     return (
-        <Grid sx={{marginX:'auto', width:'400px', paddingTop:'200px', height:'76.5vh'}} >
+        <Grid sx={{backgroundColor: 'rgba(63, 101, 154)',     
+        boxShadow: '0px 80px 55px 45px rgba(63, 101, 154)',
+        marginTop: '12vh',
+        paddingY: '5vh',
+        width: '100vw',}}>
             {userData && (
                 <Paper elevation={3} style={{ padding: '30px', maxWidth: '400px', margin: 'auto' }}>
                     {/* <CircularAvatar alt="User Avatar" src={user.avatarUrl} onClick={handleAvatarClick}>
@@ -190,6 +224,17 @@ const Profile = () => {
 
                     {subEvents.length > 0 ? (
                         subEvents.map((event) => (
+
+                            // <Typography key={event._id} component="div" style={{ padding: '5px', textAlign: 'left', color: '#004aad', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            //     {event.name}
+                            //     {isEditing && (
+                            //         <IconButton color="gray" onClick={() => handleUpdateSubEvent(event._id)}>
+                            //             <DeleteIcon />
+                            //         </IconButton>
+                            //     )}
+                            // </Typography>
+
+
                             !subEventsToDelete.includes(event._id) && (
                                 <Typography key={event._id} component="div" style={{ padding: '5px', textAlign: 'left', color: '#004aad', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     {event.name}
@@ -221,6 +266,15 @@ const Profile = () => {
                     {favEvents.length > 0 ? (
                         favEvents.map((event) => (
 
+                            // <Typography key={event._id} component="div" style={{ padding: '5px', textAlign: 'left', color: '#004aad', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            //     {event.name}
+                            //     {isEditing && (
+                            //         <IconButton color="gray" onClick={() => handleUpdateFavEvent(event._id)}>
+                            //             <FaHeart color='#C41E3D' />
+                            //         </IconButton>
+                            //     )}
+                            // </Typography>
+
                             !favEventsToDelete.includes(event._id) && (
                                 <Typography key={event._id} component="div" style={{ padding: '5px', textAlign: 'left', color: '#004aad', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     {event.name}
@@ -231,6 +285,8 @@ const Profile = () => {
                                     )}
                                 </Typography>
                             )
+
+
                         ))
                     ) : (
                         <Typography component="div" style={{ textAlign: 'left', color: '#004aad' }}>No events favorites</Typography>
@@ -257,6 +313,9 @@ const Profile = () => {
         </Grid >
     );
 };
+
+
+
 
 export default Profile;
 
