@@ -64,7 +64,7 @@ const EventDetails = () => {
   return (
 
 
-    <CardContent>
+    <CardContent sx={{marginTop: '12vh', marginBottom: '8vh'}}>
       <Grid item xs={6} sx={{ justifyContent: 'center', alignItems: 'center', height: '67vh' }} >
         <Box
           bgcolor="rgba(63, 101, 154)"
